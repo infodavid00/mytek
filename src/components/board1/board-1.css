@@ -1,0 +1,38 @@
+
+
+#board1-title {
+ margin-top: 7em;  
+ text-align: center;
+ font-family: 'bold';  
+ font-size: 18px;
+}
+#board-1-component {
+ width: 90%;
+ margin: auto;
+ margin-top: 1em;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ gap: 1em;
+}
+#board1-sec1 {
+ flex: 2;
+}
+#board1-sec2 {
+ flex: 8;
+}
+#board1-sec3 {
+ flex: 5;
+}
+
+
+@media (min-width: 760px) {
+#board1-title {
+ margin-top: 5em;  
+}
+#board-1-component {
+ margin-top: 1em;
+ flex-direction: row;
+ width: 94%;
+}
+}

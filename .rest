@@ -1,0 +1,13 @@
+
+# POST https://bbp.api.rentmanager.com/Authentication/AuthorizeUser
+# Content-Type: application/json
+
+# {
+#  "username": "API",
+#  "password": "Bushburg-AP1"
+# }
+
+
+GET https://bbp.api.rentmanager.com/Tenants
+Content-Type: application/json
+X-RM12Api-ApiToken: 1Iw8dXAtq0NaP9aj5GGlPubUmv2OLv5sr0CXlT3NBLbdDZRQSaBzdVetiScze5hWE1OIeDHnwtPyAjXTOgbaSViikeXq3LS9tNWygtb03PU=
