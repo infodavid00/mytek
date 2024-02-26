@@ -1,6 +1,6 @@
 
 import Cookies from 'js-cookie';
-import { BASENDPOINT, PROXYSERVER, SIGNINAUTHENDPOINT } from '../../variable.jsx';
+import { BASENDPOINT, PROXYSERVER, AuthorizeUser } from '../../variable.jsx';
 
 export default async function handleLogin(state) {
   const loadingState = bool => state[0](bool)
@@ -20,51 +20,42 @@ export default async function handleLogin(state) {
 
   if (username) {
      if (password) {
-      // fetch(BASENDPOINT + SIGNINAUTHENDPOINT, {
-      // method: 'POST', 
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
-      // body: JSON.stringify({username, password}) 
-      // })
-      // .then(response => response.json())
-      // .then(data => console.log(data)) 
-      // .catch(error => console.error('Error:', error)); 
-
-      // fetch(PROXYSERVER + SIGNINAUTHENDPOINT, {
-      // method: 'POST', 
-      // headers: {
-      //   'Content-Type': 'application/json'
-      // },
-      // body: JSON.stringify({username, password}) 
-      // })
-      // .then(response => response.json())
-      // .then(data => console.log(data)) 
-      // .catch(error => console.error('Error:', error)); 
-
-      // fetch('https://bbp.api.rentmanager.com/Tenants', {
-      // method: 'GET', 
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   'X-RM12Api-ApiToken': '1Iw8dXAtq0NaP9aj5GGlPubUmv2OLv5sr0CXlT3NBLbdDZRQSaBzdVetiScze5hWE1OIeDHnwtPyAjXTOgbaSViikeXq3LS9tNWygtb03PU='
-      // }
-      // })
-      // .then(response => response.json())
-      // .then(data => console.log(data)) 
-      // .catch(error => console.error('Error:', error)); 
-
-       setTimeout(()=> {
-         if (password === "123456") {
-          // successfully login
-          const expiryDate = new Date();
-          expiryDate.setDate(expiryDate.getDate() + 2);
-          Cookies.set('x-x-TOKEN-user', '12345678', { expires: expiryDate });
-          window.location.href = '/';
-         } else {
-          // incorrect password
-          handleErrors('incorrect password')
-         }
-       }, 2000)
+        fetch(PROXYSERVER + BASENDPOINT + AuthorizeUser, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username, password}) 
+        })
+        .then(response => {
+        if (!response.ok) {
+        // Check if the response status is not OK (in the range 200-299)
+        throw { response, message: `HTTP error! Status: ${response.status}` };
+        }
+        return response.json();
+        })
+       .then(data => {
+       if (data) {
+         const expiryDate = new Date();
+         expiryDate.setDate(expiryDate.getDate() + 2);
+         Cookies.set('x-x-TOKEN-user', data, { expires: expiryDate });
+         window.location.href = '/';
+        }
+       }) 
+       .catch(error => {
+        if (error.response) {
+        // Check the status code and handle errors accordingly
+        if (error.response.status === 401) {
+         handleErrors('Cannot authenticate user');
+        } else {
+         handleErrors('Something went wrong');
+        }
+        } else {
+      // Handle other types of errors (e.g., network errors)
+        console.error('Error:', error);
+        handleErrors('An error occurred');
+        }
+      });
      } else {
       handleErrors('input your password!')
      }

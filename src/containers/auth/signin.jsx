@@ -3,7 +3,7 @@ import '../../assets/stylsheets/auth.css'
 import { Loader } from '../../components/loader/loader.jsx';
 import handleLogin from '../../utils/auth/handleLogin.jsx';
 import { Info } from 'react-feather';
-import logo from '../../assets/svgs/logo.svg'
+import logo from '../../assets/svgs/logo.ico'
 
 function Signin() {
   const [loading, setisLoading] = useState(false)
