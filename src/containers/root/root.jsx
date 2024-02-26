@@ -6,6 +6,7 @@ import hello from '../../assets/svgs/hello.svg'
 import handleLogout from '../../utils/auth/handleLogout.jsx'
 import validateUser from '../../utils/user/validateUser.jsx'
 import {Loader}  from '../../components/loader/loader.jsx'
+import Footer from '../../components/footer/footer.jsx'
 
 function Root() {
   const [wasAuthenticated, setwasAuthenticated] = useState(null);
@@ -19,6 +20,7 @@ function Root() {
   }, []);
 
   return (
+    <>
     <div id='body-root'>
      {loading ? (<Loader color={'var(--colorB)'} />) : (
       <>
@@ -41,6 +43,8 @@ function Root() {
       </>
      )}
     </div>
+    <Footer  color={'var(--colorC)'} />
+    </>
   )
 }
 

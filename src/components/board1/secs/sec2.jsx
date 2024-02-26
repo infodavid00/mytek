@@ -29,7 +29,7 @@ function Level2Progress({percentage}) {
   )
 }
 
-function Level3Cards({data,color,closeTable}) {
+function Level3Cards({data,color,openTable,otInstructions}) {
   const borderTop = `10px solid ${color}`
   return (
     <div className='board1-sec2-level13-body-children-body' style={{borderTop, color}}>
@@ -43,13 +43,27 @@ function Level3Cards({data,color,closeTable}) {
         <div>Average Balance:</div>
         <div className='board1-sec2-level13-body-children-text2'>${data[3]}</div>
       </div>
-      <button className='board1-sec2-level13-body-children-btn' onClick={closeTable}>Show Me</button>
+      <button className='board1-sec2-level13-body-children-btn' onClick={()=> { openTable(), otInstructions()}}>Show Me</button>
     </div>
   )
 }
 
 function Sec2() {
   const [showTable, setShowTable] = useState(false)
+
+  const [tableData, setTableData] = useState(null)
+  const [level3_A2, setlevel3_A2] = useState('...')
+  const [level3_A3, setlevel3_A3] = useState('...')
+  const [level3_A4, setlevel3_A4] = useState('...')
+  const [level3_B2, setlevel3_B2] = useState('...')
+  const [level3_B3, setlevel3_B3] = useState('...')
+  const [level3_B4, setlevel3_B4] = useState('...')
+  const [level3_C2, setlevel3_C2] = useState('...')
+  const [level3_C3, setlevel3_C3] = useState('...')
+  const [level3_C4, setlevel3_C4] = useState('...')
+  const [level3_D1, setlevel3_D1] = useState('...')
+  const [level3_D2, setlevel3_D2] = useState('...')
+  const [level3_D3, setlevel3_D3] = useState('...')
   
   return (
     <div id='board1-sec2'>
@@ -69,24 +83,24 @@ function Sec2() {
         <div id='board1-sec2-level1-body'>
            <div className='board1-sec2-level3-header-child-cont'> 
               <div id='board1-sec2-level3-header-child1-top'>Tenant Breakdown</div>
-              <div>Contacted This Week : <span style={{color:'orange'}}>0</span></div>
-              <div>Attention : <span style={{color:'tomato'}}>222</span></div>
+              <div>Contacted This Week : <span style={{color:'orange'}}>{level3_D1}</span></div>
+              <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div>
            </div>
            <div className='board1-sec2-level3-header-child-cont'>
               <div id='board1-sec2-level3-header-child2-top'>Total Tenant Balances</div>        
-              <div id='board1-sec2-level3-header-child1-bottom'>511</div>
+              <div id='board1-sec2-level3-header-child1-bottom'>{level3_D3}</div>
            </div>
         </div>
 
         <div id='board1-sec2-level13-body-body'>
-          <Level3Cards data={['<$1,000', '151', '48,625.4', '322.02']} color={'green'} closeTable={()=> setShowTable(true)} />       
-          <Level3Cards data={['$1,000-$10,000', '266', '772,097.73', '2,902.62']} color={'orange'} closeTable={()=> setShowTable(true)} />           
-          <Level3Cards data={['>$10,000', '94', '4,255.769.7', '44,955.28']} color={'grey'} closeTable={()=> setShowTable(true)} />       
+          <Level3Cards data={['<$1,000', level3_A2, level3_A3, level3_A4]} color={'green'} openTable={()=> setShowTable(true)} otInstructions={()=> setTableData(1)} />       
+          <Level3Cards data={['$1,000-$10,000', level3_B2, level3_B3, level3_B4]} color={'orange'} openTable={()=> setShowTable(true)} otInstructions={()=> setTableData(2)} />           
+          <Level3Cards data={['>$10,000', level3_C2, level3_C3, level3_C4]} color={'grey'} openTable={()=> setShowTable(true)} otInstructions={()=> setTableData(3)} />       
         </div>
       </div>
       {/* level3 */}
       
-      {showTable && <Tables closeNav={()=>setShowTable(false)} />}
+      {showTable && <Tables closeNav={()=>setShowTable(false)} data={tableData} />}
     </div>
   )
 }

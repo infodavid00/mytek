@@ -17,7 +17,6 @@ function Board4({active = 4}) {
 
   return (
     <div id='body-boards'>
-    <div id='body-boards'>
       <DashboardHeader active={active} />
       {loading ? (
       <>
@@ -31,7 +30,6 @@ function Board4({active = 4}) {
       </>
      )
      }
-    </div>
     </div>
   )
 }

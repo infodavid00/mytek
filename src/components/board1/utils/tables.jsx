@@ -3,7 +3,7 @@
 import React from 'react'
 import './tables.css'
 
-function Tables({closeNav}) {
+function Tables({closeNav, data}) {
   return (
    <div id='show-table-boards-11'>
      <div id='show-table-boards-11-header'><button onClick={()=> closeNav()}>Close</button></div>

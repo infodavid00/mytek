@@ -5,6 +5,7 @@ import DashboardHeader from '../../components/dashboard-header/dashboardHeader.j
 import Board1Component from '../../components/board1/board-1.jsx'
 import validateUser from '../../utils/user/validateUser.jsx'
 import {Loader}  from '../../components/loader/loader.jsx'
+import Footer from '../../components/footer/footer.jsx'
 
 function Board1({active = 1}) {
   const [wasAuthenticated, setwasAuthenticated] = useState(null);
@@ -28,6 +29,7 @@ function Board1({active = 1}) {
       ) : (
       <>
       {wasAuthenticated &&  <Board1Component /> }
+     <Footer color={'var(--colorA)'} />
       </>
      )
      }
