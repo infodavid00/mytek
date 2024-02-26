@@ -9,8 +9,8 @@ export const PROXYSERVER = 'http://localhost:5020/?url='
 export const EP_Boar1Card1_A1  = `/Tenants?filters=PropertyID,bt,(1%2C18);OpenBalance,bt,(1%2C999)&fields=LastNameFirstName,OpenBalance,PropertyID`
 // A button that when pressed displays a grid with the property name from the dropdown box, the last name first name,open balence.
 
-export const EP_Boar1Card1_A2  = `/Tenants?filters=PropertyID,bt,(1%2C18);OpenBalance,bt,(1%2C999)&fields=LastNameFirstName,OpenBalance,PropertyID`
-// the total amount of tenants that have open balances under 1000 the property id will be selected in a dropdown box.
+
+
 
 export const EP_Boar1Card1_A3  = `/Tenants?filters=PropertyID,bt,(1%2C18);OpenBalance,bt,(1%2C999)&fields=LastNameFirstName,OpenBalance,PropertyID`
 // total amount tenants open balances under 1000
@@ -56,4 +56,14 @@ export const EP_Boar1Card1_D3  = `/Tenants?filters=OpenBalance,ne,0;PropertyID,e
 // # X-RM12Api-ApiToken: f1IDEWO5HOv2YA7PVt2IZbIC296gYvJ9extrR-_BHoFzXVQ-Ty-VuNQe1jyXatD1agSWFx88Kb9Pa9Vxd-lS_vJ7DI88vktTzBQjmn-fuAo=
 
 		
+
+
+
+
+
+
+
+
+
+
 

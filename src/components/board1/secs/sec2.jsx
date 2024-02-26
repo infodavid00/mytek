@@ -48,7 +48,8 @@ function Level3Cards({data,color,openTable,otInstructions}) {
   )
 }
 
-function Sec2() {
+function Sec2({currentPropertyId}) {
+  console.log(currentPropertyId)
   const [showTable, setShowTable] = useState(false)
 
   const [tableData, setTableData] = useState(null)
@@ -64,7 +65,7 @@ function Sec2() {
   const [level3_D1, setlevel3_D1] = useState('...')
   const [level3_D2, setlevel3_D2] = useState('...')
   const [level3_D3, setlevel3_D3] = useState('...')
-  
+   
   return (
     <div id='board1-sec2'>
       <div id='board1-sec2-level1-body'>
