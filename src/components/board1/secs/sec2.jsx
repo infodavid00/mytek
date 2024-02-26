@@ -1,8 +1,9 @@
 
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
+import { Card1_A2, Card1_B2, Card1_C2 } from '../../../utils/boards/board1'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -49,7 +50,6 @@ function Level3Cards({data,color,openTable,otInstructions}) {
 }
 
 function Sec2({currentPropertyId}) {
-  console.log(currentPropertyId)
   const [showTable, setShowTable] = useState(false)
 
   const [tableData, setTableData] = useState(null)
@@ -65,6 +65,16 @@ function Sec2({currentPropertyId}) {
   const [level3_D1, setlevel3_D1] = useState('...')
   const [level3_D2, setlevel3_D2] = useState('...')
   const [level3_D3, setlevel3_D3] = useState('...')
+
+
+  useEffect(() => {
+   if (currentPropertyId) {
+    // Call your async functions
+    Card1_A2(currentPropertyId, setlevel3_A2)
+    Card1_B2(currentPropertyId, setlevel3_B2)
+    Card1_C2(currentPropertyId, setlevel3_C2)
+   }
+  }, [currentPropertyId]); 
    
   return (
     <div id='board1-sec2'>

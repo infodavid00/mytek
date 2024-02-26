@@ -92,8 +92,7 @@ function Sec1({setcurrentPropertyId}) {
   
   const [PropertNameSelectedValue, setPropertNameSelectedValue ] = useState(lvl1Data[0].lists[0].PropertyID)
  
-  setcurrentPropertyId(PropertNameSelectedValue)
-    useEffect(() => {
+  useEffect(() => {
     setcurrentPropertyId(PropertNameSelectedValue);
   }, [PropertNameSelectedValue, setcurrentPropertyId]);
 
