@@ -4,6 +4,7 @@ import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
 import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2 } from '../../../utils/boards/board1'
+import { currentMonthName } from '../../../utils/dates/date.jsx'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -19,7 +20,7 @@ function Level1Card({arr}) {
 }
 
 function Level2Progress({percentage}) {
-  const width  = `${percentage.split('.')[0]}%`
+  const width  = percentage !== '...' ? `${percentage.split('.')[0]}%` : '0%'
   return (
     <div id='board1-sec2-level2-progress-cont'>
       <div id='board1-sec2-level2-progress-progress-body'>
@@ -96,8 +97,8 @@ function Sec2({currentPropertyId}) {
   return (
     <div id='board1-sec2'>
       <div id='board1-sec2-level1-body'>
-        <Level1Card arr={['Charged', 'Febuary', level1_A1]} />
-        <Level1Card arr={['Collected', 'Febuary', level1_A2]} />
+        <Level1Card arr={['Charged', currentMonthName(), level1_A1]} />
+        <Level1Card arr={['Collected', currentMonthName(), level1_A2]} />
       </div>
       {/* level1 */}
 

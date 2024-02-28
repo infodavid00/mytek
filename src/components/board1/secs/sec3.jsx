@@ -2,6 +2,8 @@
 import React from 'react'
 import '../board-1.css'
 import './sec3.css'
+import { currentMonthName } from '../../../utils/dates/date.jsx'
+import { PieChart } from 'react-minimal-pie-chart';
 
 function Level1ProgressBar({percentage}) {
   const width  = `${percentage.split('.')[0]}%`
@@ -13,12 +15,12 @@ function Level1ProgressBar({percentage}) {
 }
 
 function Level3Bar({percentageOfNotLegal}) {
-  const width  = `${percentageOfNotLegal.split('.')[0]}%`
-  return (
-     <div className='board1-sec3-level3-bar-progress-track'>
-       <div className='board1-sec3-level3-bar-progress-inner' style={{width}}></div>
-     </div>
-  )
+  const width  = percentageOfNotLegal !== '...' ? `${percentageOfNotLegal.split('.')[0]}` : 0;
+   const data = [
+  { title: 'LegaL', value: 100, color: 'var(--colorD)' },
+  { title: 'Not Legal', value: Number(width), color: 'var(--colorB)' }
+  ];
+  return  <PieChart data={data} />
 }
 
 function Sec3() {
@@ -27,7 +29,7 @@ function Sec3() {
     <div id='board1-sec3'>
        <div className='board1-sec3-level1-body'>
          <div id='board1-sec3-level1-title'>Charges Breakdown</div>
-         <div id='board1-sec3-level1-label'>For Month of Febuary</div>
+         <div id='board1-sec3-level1-label'>For Month of {currentMonthName()}</div>
          <div id='board1-sec3-level1-progress-body'>
             <div className='board1-sec3-level1-progress-cont'>
               <div>69.87%</div>
