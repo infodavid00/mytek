@@ -3,7 +3,7 @@ import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
-import { Card1_A2, Card1_B2, Card1_C2 } from '../../../utils/boards/board1'
+import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3 } from '../../../utils/boards/board1'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -73,6 +73,14 @@ function Sec2({currentPropertyId}) {
     Card1_A2(currentPropertyId, setlevel3_A2)
     Card1_B2(currentPropertyId, setlevel3_B2)
     Card1_C2(currentPropertyId, setlevel3_C2)
+    Card1_A3(currentPropertyId, setlevel3_A3)
+    Card1_B3(currentPropertyId, setlevel3_B3)
+    Card1_C3(currentPropertyId, setlevel3_C3)
+    Card1_A4(currentPropertyId, setlevel3_A4)
+    Card1_B4(currentPropertyId, setlevel3_B4)
+    Card1_C4(currentPropertyId, setlevel3_C4)
+    Card1_D3(currentPropertyId, setlevel3_D3)
+    Card1_D1(currentPropertyId, setlevel3_D1)
    }
   }, [currentPropertyId]); 
    
@@ -111,7 +119,7 @@ function Sec2({currentPropertyId}) {
       </div>
       {/* level3 */}
       
-      {showTable && <Tables closeNav={()=>setShowTable(false)} data={tableData} />}
+      {showTable && <Tables closeNav={()=>setShowTable(false)} PropertyId={currentPropertyId} Index={tableData} />}
     </div>
   )
 }

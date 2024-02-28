@@ -1,62 +1,73 @@
+import React, { useState, useEffect } from 'react';
+import './tables.css';
+import { Card1_A1, Card1_B1, Card1_C1 } from '../../../utils/boards/board1';
 
 
-import React from 'react'
-import './tables.css'
+function Tables({ closeNav, PropertyId, Index }) {
+  const [responseState, setResponseState] = useState(null);
 
-function Tables({closeNav, data}) {
+  useEffect(() => {
+     if (Index === 1)  Card1_A1(PropertyId, setResponseState);
+     if (Index === 2)  Card1_B1(PropertyId, setResponseState);
+     if (Index === 3)  Card1_C1(PropertyId, setResponseState);
+  }, []);
+
+  let response = []
+  const nullresponse = [
+      { '#' : 0,  propertyName: 'Wait', FirstName: 'Wait', LastName: 'Wait', OpenBalance: 'Wait' },
+    ];
+
+  if (typeof responseState === 'object') {
+    response = responseState;
+  }  else if (responseState === '0') {
+    response = [
+      { '#' : 0, propertyName: 'N/A', FirstName: 'N/A', LastName: 'N/A', OpenBalance: 'N/A' },
+    ];
+  } else {
+    response = [
+      { '#' : 0, propertyName: 'Error', FirstName: 'Error', LastName: 'Error', OpenBalance: 'Error' },
+    ];
+  }
+
   return (
-   <div id='show-table-boards-11'>
-     <div id='show-table-boards-11-header'><button onClick={()=> closeNav()}>Close</button></div>
-     <table id='table-boards-11-tablecontainer'>
-       <thead>
-          <tr>
-          <th className='table-boards-11-tablecontainer-thtd'>Category</th>
-          <th className='table-boards-11-tablecontainer-thtd'>Count</th>
-          <th className='table-boards-11-tablecontainer-thtd'>Charged</th>
-          <th className='table-boards-11-tablecontainer-thtd'>Collected</th>
-          <th className='table-boards-11-tablecontainer-thtd'>Ratio</th>
-        </tr>
-        </thead>
-       <tbody>
-       <tr>
-         <td className='table-boards-11-tablecontainer-thtd'>Rental</td>
-         <td className='table-boards-11-tablecontainer-thtd'>1817</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$4,627,832</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$3,223,397</td>
-         <td className='table-boards-11-tablecontainer-thtd'>69.87%</td>
-       </tr>
-       <tr>
-         <td className='table-boards-11-tablecontainer-thtd'>Reimbursement</td>
-         <td className='table-boards-11-tablecontainer-thtd'>94</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$512,407</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$189,751</td>
-         <td className='table-boards-11-tablecontainer-thtd'>37.03%</td>
-       </tr>
-       <tr>
-         <td className='table-boards-11-tablecontainer-thtd'>Other</td>
-         <td className='table-boards-11-tablecontainer-thtd'>34</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$60,223</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$58,912</td>
-         <td className='table-boards-11-tablecontainer-thtd'>97.82%</td>
-       </tr>
-       <tr>
-         <td className='table-boards-11-tablecontainer-thtd'>Tenant Direct</td>
-         <td className='table-boards-11-tablecontainer-thtd'>2</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$15,500</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$15,000</td>
-         <td className='table-boards-11-tablecontainer-thtd'>96.77%</td>
-       </tr>
-       <tr>
-         <td className='table-boards-11-tablecontainer-thtd'>Ancillary</td>
-         <td className='table-boards-11-tablecontainer-thtd'>315</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$330,224</td>
-         <td className='table-boards-11-tablecontainer-thtd'>$2,260</td>
-         <td className='table-boards-11-tablecontainer-thtd'>7.48%</td>
-       </tr>
-       </tbody>
-     </table>
-   </div>
-  )
+    <div id='show-table-boards-11'>
+      <div id='show-table-boards-11-header'>
+        <button onClick={() => closeNav()}>Close</button>
+      </div>
+      <div id='table-boards-11-tablecontainer-before'>
+        <table id='table-boards-11-tablecontainer'>
+          <thead>
+            <tr>
+              <th className='table-boards-11-tablecontainer-thtd'>#</th>
+              <th className='table-boards-11-tablecontainer-thtd'>propertyName</th>
+              <th className='table-boards-11-tablecontainer-thtd'>FirstName</th>
+              <th className='table-boards-11-tablecontainer-thtd'>LastName</th>
+              <th className='table-boards-11-tablecontainer-thtd'>OpenBalance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {responseState !== null ? response.map((item, index) => (
+              <tr key={index}>
+                <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.propertyName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.FirstName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.LastName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
+              </tr>
+            )) : nullresponse.map((item, index) => (
+              <tr key={index}>
+                <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.propertyName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.FirstName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.LastName}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-export default Tables
+export default Tables;

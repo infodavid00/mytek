@@ -9,6 +9,7 @@
 # }
 
 
-GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Tenants?filters=PropertyID,bt,(1%2C2);OpenBalance,bt,(1%2C999)&fields=LastNameFirstName,OpenBalance,PropertyID
+
+GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Tenants/HistoryCalls?filters=HistoryDate,gt,2024-02-20T11%3A24%3A00;Tenant.PropertyID,bt,(0%2C10)
 Content-Type: application/json
-X-RM12Api-ApiToken: 0O4nucdiXhEuN7DkPDBtgiw5wXenVCWwOfl9-EYRuerrFwa2qO8zDyKkhpXq5AJF0h9wq5oKbbFHnEPhviSvEfym5NZlLdaOyuEkpyO_O4k=
+X-RM12Api-ApiToken: Go8NKwGHm3BiR5sMyM26V_pPBq4KbiR0U9lrxjqxx2r3GvHAfREnjxlbTlEhy8xpIXWckd2S5P-LWgUaK8FgKJrj9pXDiEMNrIzK_pcqIz8=

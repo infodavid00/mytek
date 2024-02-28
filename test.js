@@ -98,5 +98,12 @@ const data = [
   },
 ];
 
-data.forEach((elem) => console.log(elem.PropertyID));
-console.log(data.length);
+const trimmedData = data.map((elem) => {
+  return {
+    FirstName: elem.FirstName,
+    LastName: elem.LastName,
+    OpenBalance: elem.OpenBalance,
+  };
+});
+
+console.log(trimmedData);
