@@ -72,3 +72,16 @@ export function getOneTwoAndThreeMonthBack() {
   threeMonthsBack.setMonth(currentDate.getMonth() - 3);
   return [oneMonthsBack, twoMonthsBack, threeMonthsBack];
 }
+
+export function getCurrentFormattedDateAndTime(date = new Date()) {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
+  const formattedDate = date.toLocaleString("en-US", options);
+  return formattedDate.replace(",", " @");
+}

@@ -612,3 +612,73 @@ export async function Card2_A2(propId, state) {
     state('!!!');
   }
 }
+
+
+
+
+
+
+
+
+
+export async function fetchAndProcessDataForPercentageF(propId, state, endpoint) {
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      const amount = data?.reduce( 
+        (accumulator, elem) => typeof elem.Amount === 'number' ?
+            accumulator + elem.Amount : accumulator + 0 , 0 );
+      let formattedAmount = String(amount)
+      if (formattedAmount.includes('.')) {
+        const splittedAmount = formattedAmount.split('.');
+        splittedAmount[1] = splittedAmount[1].slice(0,2)
+        formattedAmount = splittedAmount.join('.')
+      }
+
+      return Number(formattedAmount)
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
+}
+
+
+export async function Card2_A3(propId, state) {
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,bt,(${propId});IsFullyAllocated,eq,true;TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,bt,(${propId});TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`); 
+ 
+  let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
+  const Percentage = percentage.toFixed(2)
+
+  state(Percentage ? String(Percentage) : '0.00');
+}
+
+
+
+
+
+
+
+
+export async function Card2_A4(propId, state) {
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,bt,(${propId});IsFullyAllocated,eq,true;TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,in,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,bt,(${propId});TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,in,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+ 
+  let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
+  const Percentage = percentage.toFixed(2)
+
+  state(Percentage ? String(Percentage) : '0.00');
+}

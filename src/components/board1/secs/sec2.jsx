@@ -3,8 +3,8 @@ import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
-import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2 } from '../../../utils/boards/board1'
-import { currentMonthName } from '../../../utils/dates/date.jsx'
+import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4 } from '../../../utils/boards/board1'
+import { currentMonthName, getCurrentFormattedDateAndTime } from '../../../utils/dates/date.jsx'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -54,6 +54,7 @@ function Sec2({currentPropertyId}) {
   const [showTable, setShowTable] = useState(false)
 
   const [tableData, setTableData] = useState(null)
+  const [Lastupdated, setLastupdated] = useState('...')
   const [level3_A2, setlevel3_A2] = useState('...')
   const [level3_A3, setlevel3_A3] = useState('...')
   const [level3_A4, setlevel3_A4] = useState('...')
@@ -76,7 +77,7 @@ function Sec2({currentPropertyId}) {
 
   useEffect(() => {
    if (currentPropertyId) {
-    // Call your async functions
+    setLastupdated(getCurrentFormattedDateAndTime())
     Card1_A2(currentPropertyId, setlevel3_A2)
     Card1_B2(currentPropertyId, setlevel3_B2)
     Card1_C2(currentPropertyId, setlevel3_C2)
@@ -90,7 +91,10 @@ function Sec2({currentPropertyId}) {
     Card1_D1(currentPropertyId, setlevel3_D1)
 
     Card2_A1(currentPropertyId, setlevel1_A1)
-    Card2_A2(currentPropertyId, setlevel1_A2)
+    Card2_A2(currentPropertyId, setlevel1_A2) 
+    
+    Card2_A3(currentPropertyId, setlevel2_A3)
+    Card2_A4(currentPropertyId, setlevel2_A4)
    }
   }, [currentPropertyId]); 
    
@@ -98,7 +102,7 @@ function Sec2({currentPropertyId}) {
     <div id='board1-sec2'>
       <div id='board1-sec2-header'>
         <div id='board1-sec2-header-t1'>Collections Dashboard </div>
-        <div id='board1-sec2-header-t2'>Last updated - 2024-02-28 @ 12:02pm</div>
+        <div id='board1-sec2-header-t2'>Last updated - {Lastupdated}</div>
       </div>
       {/* header */}
 
