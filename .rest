@@ -10,6 +10,6 @@
 
 
 
-GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Tenants/HistoryCalls?filters=HistoryDate,gt,2024-02-20T11%3A24%3A00;Tenant.PropertyID,bt,(0%2C10)
+GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Charges?filters=PropertyID,bt,(1%2C50);IsFullyAllocated,eq,true;TransactionDate,gt,2024-02-01T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)
 Content-Type: application/json
-X-RM12Api-ApiToken: Go8NKwGHm3BiR5sMyM26V_pPBq4KbiR0U9lrxjqxx2r3GvHAfREnjxlbTlEhy8xpIXWckd2S5P-LWgUaK8FgKJrj9pXDiEMNrIzK_pcqIz8=
+X-RM12Api-ApiToken: 0F9JmGu96uZbTURyiuVWQcraxmSHLgVu6cgBwNABrGJ14M-ZKlFXrOKYuv7ni2oMpuqfJqBUxLkhnf3L5JnFy-yqs8uzokwUFVaEE6LzllI=

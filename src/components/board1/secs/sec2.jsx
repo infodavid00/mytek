@@ -3,7 +3,7 @@ import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
-import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3 } from '../../../utils/boards/board1'
+import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2 } from '../../../utils/boards/board1'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -67,6 +67,12 @@ function Sec2({currentPropertyId}) {
   const [level3_D3, setlevel3_D3] = useState('...')
 
 
+  const [level1_A1, setlevel1_A1] = useState('...')
+  const [level1_A2, setlevel1_A2] = useState('...')
+  const [level2_A3, setlevel2_A3] = useState('...')
+  const [level2_A4, setlevel2_A4] = useState('...')
+
+
   useEffect(() => {
    if (currentPropertyId) {
     // Call your async functions
@@ -81,20 +87,23 @@ function Sec2({currentPropertyId}) {
     Card1_C4(currentPropertyId, setlevel3_C4)
     Card1_D3(currentPropertyId, setlevel3_D3)
     Card1_D1(currentPropertyId, setlevel3_D1)
+
+    Card2_A1(currentPropertyId, setlevel1_A1)
+    Card2_A2(currentPropertyId, setlevel1_A2)
    }
   }, [currentPropertyId]); 
    
   return (
     <div id='board1-sec2'>
       <div id='board1-sec2-level1-body'>
-        <Level1Card arr={['Charged', 'Febuary', '5,343,333.22']} />
-        <Level1Card arr={['Collected', 'Febuary', '5,343,333.22']} />
+        <Level1Card arr={['Charged', 'Febuary', level1_A1]} />
+        <Level1Card arr={['Collected', 'Febuary', level1_A2]} />
       </div>
       {/* level1 */}
 
       <div style={{marginTop : '1em'}}>
-        <div className='board1-sec2-level2-children'>Current Month Residential Gauge <Level2Progress percentage={'69.17'} /> </div>
-        <div className='board1-sec2-level2-children'>Current Month Commercial Gauge <Level2Progress percentage={'65.32'} /> </div>
+        <div className='board1-sec2-level2-children'>Current Month Residential Gauge <Level2Progress percentage={level2_A3} /> </div>
+        <div className='board1-sec2-level2-children'>Current Month Commercial Gauge <Level2Progress percentage={level2_A4} /> </div>
       </div>
       {/* level2 */}
 
