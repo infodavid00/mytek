@@ -85,3 +85,18 @@ export function getCurrentFormattedDateAndTime(date = new Date()) {
   const formattedDate = date.toLocaleString("en-US", options);
   return formattedDate.replace(",", " @");
 }
+
+
+
+export function endOfMonth(currentDate = new Date()) {
+  const lastDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  );
+  const year = lastDayOfMonth.getFullYear();
+  const month = String(lastDayOfMonth.getMonth() + 1).padStart(2, "0");
+  const day = String(lastDayOfMonth.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+}

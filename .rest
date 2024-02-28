@@ -8,6 +8,6 @@
 #  "password": "Bushburg-AP1"
 # }
 
-GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Charges?filters=PropertyID,bt,(1%2C50);TransactionDate,gt,2024-02-01T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)
+GET http://localhost:5020/?url=https://bbp.api.rentmanager.com/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(2024-02-01T00%3A00%3A00,2024-02-28T00%3A00);PropertyID,bt,(1%2C10);Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)
 Content-Type: application/json
-X-RM12Api-ApiToken: PLGt2M6PLkPcfQ7t5oCXmtPU4YliJY5O5iqMHOb7eR-KImKngTPOVr7OkZFKPTBe65oKEgnWwXiOd7dZ40fLfi3Nbef7oZtmghqqhct9Zn0=
+X-RM12Api-ApiToken: RM7mtLY-rPpFfrB9DT1kEsp780f_fCTFgceeB31sligS0yXd6vDVW9aOCRFmz1OB26XXqG6YzVTys3E8XFfr7VFgUIso5ypnQrV3T_spMbo=

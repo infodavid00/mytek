@@ -5,6 +5,7 @@ import './sec1.css'
 import { lvl1Data } from './dropdown.jsx';
 import { currentMonthName, getOneTwoAndThreeMonthBack, showDateYear, startOfMonth } from '../../../utils/dates/date.jsx';
 import logo from '../../../assets/svgs/local_1 (1).svg'
+import { Card3_A1A2, Card3_A3A4, Card3_A5A6 } from '../../../utils/boards/board1.jsx';
 
 function Level1Input({ data, PropertNameSelectedValue, setPropertNameSelectedValue }) {
   const handlePropertNameSelectChange = (event) => {
@@ -32,10 +33,10 @@ function Level2Bars({data}) {
   return (
      <div id='board1-sec1-level2-barssec-container'>
        <div id='board1-sec1-level2-barssec-bars1'>
-         <div>{data[0]}M</div>
+         <div>{data[0]}</div>
        </div>
        <div id='board1-sec1-level2-barssec-bars2'>
-         <div>{data[1]}M</div>
+         <div>{data[1]}</div>
        </div>
      </div>
   )
@@ -72,9 +73,19 @@ function Sec1({setcurrentPropertyId}) {
   return returnObject;
   };
 
+
+  const [level2_A1A2, setlevel2_A1A2] = useState({percentage: '...', A: '...', B: '...'})
+  const [level2_A3A4, setlevel2_A1A4] = useState({percentage: '...', A: '...', B: '...'})
+  const [level2_A5A6, setlevel2_A5A6] = useState({percentage: '...', A: '...', B: '...'})
+
   useEffect(() => {
     setcurrentPropertyId(PropertNameSelectedValue);
-  }, [PropertNameSelectedValue, setcurrentPropertyId]);
+    if (PropertNameSelectedValue) { 
+      Card3_A1A2(PropertNameSelectedValue, setlevel2_A1A2, new Date(level2barsecDDMMYY()[2]['raw']))
+      Card3_A3A4(PropertNameSelectedValue, setlevel2_A1A4, new Date(level2barsecDDMMYY()[1]['raw']))
+      Card3_A5A6(PropertNameSelectedValue, setlevel2_A5A6, new Date(level2barsecDDMMYY()[0]['raw']))
+    }
+  }, [PropertNameSelectedValue, setcurrentPropertyId]); 
 
   return (
     <div id='board1-sec1'>
@@ -93,18 +104,18 @@ function Sec1({setcurrentPropertyId}) {
         <div id='board1-sec1-level2-title'>Previous Three Months Progress Gauge</div>
         <div id='board1-sec1-level2-barssec-body'>
            <div>
-             <div>91.84%</div>
-             <Level2Bars data={['55.0', '54.6']} />
+             <div>{level2_A1A2.percentage + '%'}</div>
+             <Level2Bars data={[level2_A1A2.A, level2_A1A2.B]} />
              <div>{level2barsecDDMMYY()[2]['ser']}</div>
            </div>
            <div>
-             <div>90.50%</div>
-             <Level2Bars data={['55.0', '54.5']} />
+             <div>{level2_A3A4.percentage  + '%'}</div>
+             <Level2Bars data={[level2_A3A4.A, level2_A3A4.B]} />
              <div>{level2barsecDDMMYY()[1]['ser']}</div>
            </div>
            <div>
-             <div>82.54%</div>
-             <Level2Bars data={['54.9', '54.1']} />
+             <div>{level2_A5A6.percentage  + '%'}</div>
+             <Level2Bars data={[level2_A5A6.A, level2_A5A6.B]} />
              <div>{level2barsecDDMMYY()[0]['ser']}</div>
            </div>
         </div>
