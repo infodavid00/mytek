@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import { BASENDPOINT, PROXYSERVER } from '../../variable.jsx';
 import { lvl1Data } from '../../components/board1/secs/dropdown.jsx';
+import { oneWeekBack } from '../dates/date.jsx';
 
 const token = Cookies.get();
 const AuthorizationToken = token['x-x-TOKEN-user'];
@@ -502,13 +503,7 @@ export async function Card1_D1(propId, state) {
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
 
-   const currentDate = new Date();
-   const year = currentDate.getFullYear();
-   const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Note: Months are zero-based
-   const day = String(currentDate.getDate()).padStart(2, '0');
-   const formattedDate = `${year}-${month}-${day}`;
-
-  const response = await fetch(PROXYSERVER + BASENDPOINT + `/Tenants/HistoryCalls?filters=HistoryDate,gt,${formattedDate}T11%3A24%3A00;Tenant.PropertyID,bt,(${propId})`, {
+  const response = await fetch(PROXYSERVER + BASENDPOINT + `/Tenants/HistoryCalls?filters=HistoryDate,gt,${oneWeekBack()}T11%3A24%3A00;Tenant.PropertyID,bt,(${propId})`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
