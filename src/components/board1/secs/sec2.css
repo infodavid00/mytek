@@ -1,4 +1,20 @@
 
+#board1-sec2-header {
+  background-color: var(--colorB);
+  padding: 10px;
+  width: 100%;
+  border-radius: 7px;
+  color: rgba(220,220,220,1);
+  text-align: center;
+  margin-bottom: 1em;
+}
+#board1-sec2-header-t1 {
+  font-family: 'bold';
+  font-size: 27px;
+}
+#board1-sec2-header-t2 {
+  font-family: 'regular';
+}
 #board1-sec2-level1-body {
   display:flex;
   flex-direction: column;

@@ -4,6 +4,7 @@ import '../board-1.css'
 import './sec1.css'
 import { lvl1Data } from './dropdown.jsx';
 import { currentMonthName, getOneTwoAndThreeMonthBack, showDateYear, startOfMonth } from '../../../utils/dates/date.jsx';
+import logo from '../../../assets/svgs/local_1 (1).svg'
 
 function Level1Input({ data, PropertNameSelectedValue, setPropertNameSelectedValue }) {
   const handlePropertNameSelectChange = (event) => {
@@ -77,6 +78,11 @@ function Sec1({setcurrentPropertyId}) {
 
   return (
     <div id='board1-sec1'>
+      <div id='board1-sec1-header'>
+        <img src={logo} id='board1-sec1-header-img1' />
+        <div id='board1-sec1-header-t1'>BUSHBURG</div>
+      </div>
+
       <div className='board1-sec1-level1-body'>
         {lvl1Data.map((elem, index) => (
           <Level1Input data={elem} key={index} PropertNameSelectedValue={PropertNameSelectedValue} setPropertNameSelectedValue={setPropertNameSelectedValue} />

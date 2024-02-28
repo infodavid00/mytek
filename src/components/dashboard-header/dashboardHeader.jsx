@@ -1,7 +1,7 @@
 
 import React from 'react'
 import './dashboardHeader.css'
-import logo from '../../assets/svgs/logo.ico'
+import logo from '../../assets/svgs/local_1 (2) copy.svg'
 import { Link } from 'react-router-dom'
 
 function DashboardHeader({active}) {

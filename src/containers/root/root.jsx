@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from 'react'
 import '../../assets/stylsheets/root.css'
-import logo from '../../assets/svgs/logo.ico'
+import logo from '../../assets/svgs/local_1 (2) copy.svg'
 import hello from '../../assets/svgs/hello.svg'
 import handleLogout from '../../utils/auth/handleLogout.jsx'
 import validateUser from '../../utils/user/validateUser.jsx'

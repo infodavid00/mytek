@@ -96,6 +96,12 @@ function Sec2({currentPropertyId}) {
    
   return (
     <div id='board1-sec2'>
+      <div id='board1-sec2-header'>
+        <div id='board1-sec2-header-t1'>Collections Dashboard </div>
+        <div id='board1-sec2-header-t2'>Last updated - 2024-02-28 @ 12:02pm</div>
+      </div>
+      {/* header */}
+
       <div id='board1-sec2-level1-body'>
         <Level1Card arr={['Charged', currentMonthName(), level1_A1]} />
         <Level1Card arr={['Collected', currentMonthName(), level1_A2]} />

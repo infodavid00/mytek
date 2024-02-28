@@ -9,7 +9,6 @@ function Board1Component() {
   const [currentPropertyId, setcurrentPropertyId] = useState(null)
   return (
     <>
-    <div id='board1-title'>Last updated : 12/20/2022 @15:02.30</div>
     <div id='board-1-component'> 
       <Sec1 setcurrentPropertyId={setcurrentPropertyId} />
       <Sec2 currentPropertyId={currentPropertyId}/>
