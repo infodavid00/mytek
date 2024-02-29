@@ -112,7 +112,7 @@ function Sec2({currentPropertyId}) {
       </div>
       {/* level1 */}
 
-      <div style={{marginTop : '1em'}}>
+      <div className='perc_1' style={{marginTop : '1em'}}>
         <div className='board1-sec2-level2-children'>Current Month Residential Gauge <Level2Progress percentage={level2_A3} /> </div>
         <div className='board1-sec2-level2-children'>Current Month Commercial Gauge <Level2Progress percentage={level2_A4} /> </div>
       </div>

@@ -3,7 +3,7 @@
  background-color: var(--colorB);
  border-radius: 10px;
  padding: 10px 0.7em;
- color: rgba(24,240,240,1);
+ color: rgb(255, 255, 255);
  margin-bottom: 1em;
  width: 100%;
 }
@@ -15,7 +15,7 @@
 #board1-sec3-level1-label {
  font-family: 'regular';
  text-align: center;
- color: rgba(24,210,210,1);
+ color: rgb(255, 255, 255);
 }
 
 
