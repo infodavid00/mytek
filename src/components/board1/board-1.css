@@ -28,3 +28,15 @@
  width: 94%;
 }
 }
+
+@media (min-width: 1380px) {
+#board-1-component {
+ margin-top: 7em;
+ flex-direction: row;
+ width: 89%;
+}
+#board1-sec1, #board1-sec2 , #board1-sec3{
+ padding-left: 0.1em;
+ padding-right: 0.1em;
+}
+}

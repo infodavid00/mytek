@@ -4,7 +4,7 @@
  border-radius: 10px;
  padding: 10px 0.7em;
  color: rgba(24,240,240,1);
- margin-bottom: 2em;
+ margin-bottom: 1em;
  width: 100%;
 }
 #board1-sec3-level1-title {
@@ -65,7 +65,7 @@
 #board1-sec3-level1-table-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 10px;
   overflow: scroll;
 }
 .board1-sec3-level1-table-thtd {
