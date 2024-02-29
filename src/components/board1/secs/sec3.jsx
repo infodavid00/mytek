@@ -23,7 +23,7 @@ function Level3Bar({percentageOfNotLegal}) {
   { title: 'Not Legal', value: 100, color: 'var(--colorD)' }
   ];
   return  (
-    <div style={{width: '200px', height:'200px'}}>
+    <div style={{width: '140px', height:'140px'}}>
     <PieChart data={data} />
     </div>
   )
@@ -58,7 +58,7 @@ function Sec3({currentPropertyId}) {
               <div>37.03%</div>
               <Level1ProgressBar percentage={'37.03'} />
               <div className='board1-sec3-level1-progress-label'>Reimbursement</div>
-            </div>
+            </div> 
             <div className='board1-sec3-level1-progress-cont'>
               <div>97.82%</div>
               <Level1ProgressBar percentage={'97.82'} />

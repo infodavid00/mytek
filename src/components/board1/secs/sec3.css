@@ -21,7 +21,7 @@
 
 #board1-sec3-level1-progress-body {
  display :flex;
- flex-direction: column;
+ flex-direction: row;
  align-items: center;
  justify-content: center;
  gap: 0.5em;
@@ -101,7 +101,7 @@
  width: 100%;
 }
 #board1-sec3-level3-title {
- font-size: 22px;
+ font-size: 19px;
  font-family: 'bold';
 }
 #board1-sec3-level3-sec2-body {
@@ -113,7 +113,7 @@
 }
 #board1-sec3-level3-sec2-2 {
  font-family: 'bold';
- font-size: 17px;
+ font-size: 15px;
 }
 #board1-sec3-level3-sec2-2-boldtxt1 {
  font-size: 23px;

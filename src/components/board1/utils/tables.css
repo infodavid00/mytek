@@ -40,13 +40,14 @@
 }
 
 #table-boards-11-tablecontainer-before {
-  width: 70%;
-  height: 80vh;
+  width: 60%;
+  height: 75vh;
   position: fixed;
   overflow: auto;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 12px;
 }
 #table-boards-11-tablecontainer {
   width: 100%;
@@ -57,6 +58,7 @@
   animation-fill-mode: forwards;
   border-collapse: collapse;
   margin-top: 1em;
+  border-radius: 12px;
 }
 @keyframes show-table-11boards{
   from {transform: scale(0)} 
