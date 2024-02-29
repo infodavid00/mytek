@@ -50,7 +50,7 @@
   position: relative;
 }
 .board1-sec3-level1-progress-progress-inner  {
- position: absolute;
+  position: absolute;
   background-color: var(--colorD);
   padding: 6px 0px;
   border-radius: 4px;
