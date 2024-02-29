@@ -113,11 +113,12 @@
 }
 #board1-sec3-level3-sec2-2 {
  font-family: 'bold';
+ font-size: 17px;
 }
 #board1-sec3-level3-sec2-2-boldtxt1 {
- font-size: 27px;
+ font-size: 23px;
  font-family: 'extrabold';
- margin: 0.2em 0em;
+ margin: 0.4em 0em;
 }
 #board1-sec3-level3-sec2-2-boldtxt2 {
  font-size: 19px;

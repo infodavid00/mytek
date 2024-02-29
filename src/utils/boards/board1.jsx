@@ -798,3 +798,267 @@ export async function Card3_A5A6(propId, state, ddmmyy) {
      A: formatShortNumber(Number(AmountA)), B: formatShortNumber(Number(AmountB))})
 }
  
+
+
+
+
+
+
+
+
+
+
+
+export async function Card4_A3(propId, state) {
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,bt,(${propId})&fields=ParentID,Property,Tenant,Value`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      let DATALENGTH = 0;
+      if (data) {
+       const uniqueParentIDs = new Set();
+       data.forEach(obj => {
+         uniqueParentIDs.add(obj.ParentID);
+       });
+       const uniqueArray = Array.from(uniqueParentIDs);
+       DATALENGTH = uniqueArray.length;
+      }
+      state(DATALENGTH);
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
+}
+
+
+
+
+
+
+
+export async function FETCHPARENTIDSFORCARD4(state, endpoint, shouldusenull) {
+  shouldusenull ? state(null) : state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      let ParentIDS = [];
+      if (data) {
+       const uniqueParentIDs = new Set();
+       data.forEach(obj => {
+         uniqueParentIDs.add(obj.ParentID);
+       });
+       const uniqueArray = Array.from(uniqueParentIDs);
+       ParentIDS = uniqueArray;
+      }
+      return ParentIDS;
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    shouldusenull ? state(false) : state('!!!')
+  }
+}
+
+
+
+
+
+
+
+
+
+export async function FETCHPARENTIDSFORCARD4B(state, endpoint) {
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      const OB = data?.reduce( 
+        (accumulator, elem) => accumulator + elem.OpenBalance, 0 );
+      let openBalance = String(OB)
+
+      if (openBalance.includes('.')) {
+        const splittedOB = openBalance.split('.');
+        splittedOB[1] = splittedOB[1].slice(0,2)
+        openBalance = splittedOB.join('.')
+      }
+      return data ? openBalance : '0';
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+export async function FETCHPARENTIDSFORCARD4PIECHARTNOTLEGAL(state, endpoint) {
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      let ParentIDS = [];
+      if (data) {
+       const uniqueParentIDs = new Set();
+       data.forEach(obj => {
+        if (obj.Value === "No") {
+          uniqueParentIDs.add(obj.ParentID);
+        }
+       });
+       const uniqueArray = Array.from(uniqueParentIDs);
+       ParentIDS = uniqueArray;
+      }
+      return ParentIDS.length;
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
+}
+
+
+
+
+
+
+
+
+export async function Card4_A4(propId, state) {
+  const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,bt,(${propId})&fields=ParentID,Property,Tenant,Value`);
+  const validParentIDS = ParentIDS.join('%2C')
+  const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=OpenBalance,gt,0;TenantID,in,(${validParentIDS})&fields=OpenBalance`);
+
+  state(DataFromRequest)
+}
+ 
+ 
+
+
+export async function Card4_A1A2_PIE(propId, state) {
+  const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,bt,(${propId})&fields=ParentID,Property,Tenant,Value`);
+  const LEGAL = ParentIDS.length
+  const NOTLEGAL  = await FETCHPARENTIDSFORCARD4PIECHARTNOTLEGAL(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Tenant.PropertyID,bt,(${propId})&fields=ParentID,Property,Tenant,Value`)
+ 
+  let percentage = LEGAL < NOTLEGAL ? (LEGAL / NOTLEGAL) * 100 : 100;
+  // let percentage = NOTLEGAL < LEGAL ? (NOTLEGAL / LEGAL) * 100 : 100;
+  const Percentage = percentage.toFixed(2)
+  
+  state(Percentage)
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function FETCHTABLEDATAFORA5(state, endpoint) {
+  state(null)
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      if (data) {
+        const trimmedData = data.map((elem) => {
+        return {
+          Name: elem.Name,
+          OpenBalance: elem.OpenBalance,
+          Comment: elem.Comment,
+          };
+        });
+        return trimmedData;
+      } else {
+        state('0');
+      }
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state(false);
+  }
+}
+
+
+
+
+
+
+export async function Card4_A5(propId, state) {
+  state(null)
+  const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,bt,(${propId})&fields=ParentID,Property,Tenant,Value`, true);
+  const validParentIDS = ParentIDS.join('%2C')
+  const DataFromRequest = await FETCHTABLEDATAFORA5(state, `/Tenants?filters=OpenBalance,gt,0;TenantID,in,(${validParentIDS})&fields=Comment,LastNameFirstName,OpenBalance`);
+  state(DataFromRequest)
+}
+ 
