@@ -2,7 +2,7 @@
 #board1-sec2-header {
   background-color: var(--colorB);
   padding: 10px;
-  width: 100%;
+  /* width: 100%;k */
   border-radius: 7px;
   color: rgba(220,220,220,1);
   text-align: center;
@@ -79,7 +79,15 @@
   border-radius: 4px;
 }
 
-
+.perc_1{
+  padding: 30px;
+  border: 2px solid var(--colorB);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
 
 #board1-sec2-level13-body {
   margin-top: 1em;

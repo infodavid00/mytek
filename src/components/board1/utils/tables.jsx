@@ -35,7 +35,7 @@ function Tables({ closeNav, PropertyId, Index }) {
         <button onClick={() => closeNav()}>Close</button>
       </div>
       <div id='table-boards-11-tablecontainer-before'>
-        <table id='table-boards-11-tablecontainer'>
+        <table className='tab_01' id='table-boards-11-tablecontainer'>
           <thead>
             <tr>
               <th className='table-boards-11-tablecontainer-thtd'>#</th>

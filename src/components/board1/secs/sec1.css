@@ -3,14 +3,14 @@
  background-color: var(--colorB);
  border-radius: 10px;
  padding: 10px 2em;
- color: rgba(24,240,240,1);
+ color: rgb(255, 255, 255);
  margin-bottom: 2em;
 }
 
 #board1-sec1-header{
   background-color: var(--colorB);
   padding: 8px 8px;
-  width: 100%;
+  /* width: 100%; */
   border-radius: 7px;
   color: rgba(220,220,220,1);
   display: flex;
