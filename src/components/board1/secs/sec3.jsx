@@ -8,10 +8,10 @@ import { Card4_A1A2_PIE, Card4_A3, Card4_A4 } from '../../../utils/boards/board1
 import TableB from '../utils/tableB.jsx'
 
 function Level1ProgressBar({percentage}) {
-  const width  = `${percentage.split('.')[0]}%`
+  const height  = `${percentage.split('.')[0]}%`
   return (
      <div className='board1-sec3-level1-progress-progress-track'>
-       <div className='board1-sec3-level1-progress-progress-inner' style={{width}}></div>
+       <div className='board1-sec3-level1-progress-progress-inner' style={{height}}></div>
      </div>
   )
 }
@@ -67,7 +67,7 @@ function Sec3({currentPropertyId}) {
             <div className='board1-sec3-level1-progress-cont'>
               <div>96.72%</div>
               <Level1ProgressBar percentage={'96.72'} />
-              <div className='board1-sec3-level1-progress-label'>Tenant Direct</div>
+              <div className='board1-sec3-level1-progress-label'>Tenant...</div>
             </div>
             <div className='board1-sec3-level1-progress-cont'>
               <div>7.48%</div>

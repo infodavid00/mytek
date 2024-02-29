@@ -30,21 +30,33 @@
 .board1-sec3-level1-progress-cont {
  width: 100%;
  border-bottom: 1px solid rgba(200,200,200,0.2);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
 }
 .board1-sec3-level1-progress-label {
  font-family: 'bold';
+ font-size: 13px;
+ /* text-align: center; */
 }
 .board1-sec3-level1-progress-progress-track {
   background-color: var(--colorA);
-  width: 100%;
+  width: 59%;
   border-radius: 4px;
   padding: 1px;
   margin: 0.3em 0em;
+  height: 70px;
+  position: relative;
 }
 .board1-sec3-level1-progress-progress-inner  {
+ position: absolute;
   background-color: var(--colorD);
   padding: 6px 0px;
   border-radius: 4px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 #board1-sec3-level1-table-body {
   margin-top: 1em;
