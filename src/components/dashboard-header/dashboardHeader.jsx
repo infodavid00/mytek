@@ -9,7 +9,6 @@ function DashboardHeader({active}) {
     {title:'Board1' , index:1},
     {title:'Board2' , index:2},
     {title:'Board3' , index:3},
-    {title:'Board4' , index:4}
   ]
 
   return (
