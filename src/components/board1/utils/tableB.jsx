@@ -44,7 +44,7 @@ function Tables({ closeNav, PropertyId }) {
             </tr>
           </thead>
           <tbody>
-            {responseState !== null ? response.map((item, index) => (
+            {responseState !== null ? response.slice().sort((a, b) => a.Name.localeCompare(b.Name)).map((item, index) => (
               <tr key={index}>
                 <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.Name}</td>
@@ -55,7 +55,7 @@ function Tables({ closeNav, PropertyId }) {
               <tr key={index}>
                 <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.Name}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>${numeral(item.OpenBalance).format("0,0")}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.Comment}</td>
               </tr>
             ))}
