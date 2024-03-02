@@ -2,19 +2,19 @@
 import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec3.css'
-import { currentMonthName } from '../../../utils/dates/date.jsx'
+// import { currentMonthName } from '../../../utils/dates/date.jsx'
 import { PieChart } from 'react-minimal-pie-chart';
 import { Card4_A1A2_PIE, Card4_A3, Card4_A4 } from '../../../utils/boards/board1.jsx';
 import TableB from '../utils/tableB.jsx'
 
-function Level1ProgressBar({percentage}) {
-  const height  = `${percentage.split('.')[0]}%`
-  return (
-     <div className='board1-sec3-level1-progress-progress-track'>
-       <div className='board1-sec3-level1-progress-progress-inner' style={{height}}></div>
-     </div>
-  )
-}
+// function Level1ProgressBar({percentage}) {
+//   const height  = `${percentage.split('.')[0]}%`
+//   return (
+//      <div className='board1-sec3-level1-progress-progress-track'>
+//        <div className='board1-sec3-level1-progress-progress-inner' style={{height}}></div>
+//      </div>
+//   )
+// }
 
 function Level3Bar({percentageOfNotLegal}) {
   const width  = percentageOfNotLegal !== '...' ? `${percentageOfNotLegal.split('.')[0]}` : 0;
@@ -45,7 +45,7 @@ function Sec3({currentPropertyId}) {
 
   return (
     <div id='board1-sec3'>
-       <div className='board1-sec3-level1-body'>
+       {/* <div className='board1-sec3-level1-body'>
          <div id='board1-sec3-level1-title'>Charges Breakdown</div>
          <div id='board1-sec3-level1-label'>For Month of {currentMonthName()}</div>
          <div id='board1-sec3-level1-progress-body'>
@@ -126,11 +126,11 @@ function Sec3({currentPropertyId}) {
            </tbody>
          </table>
         </div>
-       </div>
+       </div> */}
       {/* level 1 */}
 
 
-      <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
+      {/* <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
         <div className='board1-sec3-level2-children'>
           <div className='board1-sec3-level2-children-title'>Total Arrears:</div>
           <div className='board1-sec3-level2-children-val' style={{color:'grey'}}>$5,046,519.91</div>
@@ -143,7 +143,7 @@ function Sec3({currentPropertyId}) {
           <div className='board1-sec3-level2-children-title'>Arrears Collected MTD:</div>
           <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>$553,783.23</div>
         </div>
-      </div>
+      </div> */}
       {/* level 2 */}
 
 

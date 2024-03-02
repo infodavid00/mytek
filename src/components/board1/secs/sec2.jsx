@@ -119,9 +119,9 @@ function Sec2({currentPropertyId}) {
       {/* level2 */}
 
       <div id='board1-sec2-level13-body'>
+        <div id='board1-sec2-level3-header-child1-top'>Tenant Breakdown</div>
         <div id='board1-sec2-level1-body'>
            <div className='board1-sec2-level3-header-child-cont'> 
-              <div id='board1-sec2-level3-header-child1-top'>Tenant Breakdown</div>
               <div>Contacted This Week : <span style={{color:'orange'}}>{level3_D1}</span></div>
               <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div>
            </div>
