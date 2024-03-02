@@ -52,7 +52,7 @@ function Tables({ closeNav, PropertyId, Index }) {
                 <td className='table-boards-11-tablecontainer-thtd'>{item.propertyName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.FirstName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.LastName}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>${item.OpenBalance}</td>
               </tr>
             )) : nullresponse.map((item, index) => (
               <tr key={index}>
@@ -60,7 +60,7 @@ function Tables({ closeNav, PropertyId, Index }) {
                 <td className='table-boards-11-tablecontainer-thtd'>{item.propertyName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.FirstName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.LastName}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>${item.OpenBalance}</td>
               </tr>
             ))}
           </tbody>

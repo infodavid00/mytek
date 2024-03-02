@@ -2,9 +2,11 @@ import Cookies from 'js-cookie';
 import { BASENDPOINT, PROXYSERVER } from '../../variable.jsx';
 import { lvl1Data } from '../../components/board1/secs/dropdown.jsx';
 import { endOfMonth, startOfMonth, startOfWeek } from '../dates/date.jsx';
+import numeral from 'numeral';
 
 const token = Cookies.get();
 const AuthorizationToken = token['x-x-TOKEN-user'];
+const formatNumber = num => numeral(num).format("0,0")
 
 export async function Card1_A2(propId, state) {
   state('...')
@@ -19,7 +21,7 @@ export async function Card1_A2(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      state(data ? data.length : '0');
+      state(data ? formatNumber(data.length) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -47,7 +49,7 @@ export async function Card1_B2(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      state(data ? data.length : '0');
+      state(data ? formatNumber(data.length) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -76,7 +78,7 @@ export async function Card1_C2(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      state(data ? data.length : '0');
+      state(data ? formatNumber(data.length) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -114,7 +116,7 @@ export async function Card1_A3(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -153,7 +155,7 @@ export async function Card1_B3(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -191,7 +193,7 @@ export async function Card1_C3(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -229,7 +231,7 @@ export async function Card1_A4(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -268,7 +270,7 @@ export async function Card1_B4(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -306,7 +308,7 @@ export async function Card1_C4(propId, state) {
         splittedOB[1] = splittedOB[1].slice(0,2)
         openBalance = splittedOB.join('.')
       }
-      state(data ? openBalance : '0');
+      state(data ? formatNumber(openBalance) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -343,7 +345,7 @@ export async function Card1_A1(propId, state) {
           propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
           FirstName: elem.FirstName,
           LastName: elem.LastName,
-          OpenBalance: elem.OpenBalance,
+          OpenBalance: formatNumber(elem.OpenBalance),
           };
         });
         state(trimmedData);
@@ -388,7 +390,7 @@ export async function Card1_B1(propId, state) {
           propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
           FirstName: elem.FirstName,
           LastName: elem.LastName,
-          OpenBalance: elem.OpenBalance,
+          OpenBalance: formatNumber(elem.OpenBalance),
           };
         });
         state(trimmedData);
@@ -432,7 +434,7 @@ export async function Card1_C1(propId, state) {
           propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
           FirstName: elem.FirstName,
           LastName: elem.LastName,
-          OpenBalance: elem.OpenBalance,
+          OpenBalance: formatNumber(elem.OpenBalance),
           };
         });
         state(trimmedData);
@@ -477,7 +479,7 @@ export async function Card1_D3(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      state(data ? data.length : '0');
+      state(data ? formatNumber(data.length) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -512,7 +514,7 @@ export async function Card1_D1(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      state(data ? data.length : '0');
+      state(data ? formatNumber(data.length) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -554,7 +556,7 @@ export async function Card2_A1(propId, state) {
         splittedAM[1] = splittedAM[1].slice(0,2)
         Amount = splittedAM.join('.')
       }
-      state(data ? Amount : '0');
+      state(data ? formatNumber(Amount) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -602,7 +604,7 @@ export async function Card2_A2(propId, state) {
         splittedAM[1] = splittedAM[1].slice(0,2)
         Amount = splittedAM.join('.')
       }
-      state(data ? Amount : '0');
+      state(data ? formatNumber(Amount) : '0');
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -831,7 +833,7 @@ export async function Card4_A3(propId, state) {
        const uniqueArray = Array.from(uniqueParentIDs);
        DATALENGTH = uniqueArray.length;
       }
-      state(DATALENGTH);
+      state(formatNumber(DATALENGTH));
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -950,7 +952,7 @@ export async function FETCHPARENTIDSFORCARD4PIECHARTNOTLEGAL(state, endpoint) {
       if (data) {
        const uniqueParentIDs = new Set();
        data.forEach(obj => {
-        if (obj.Value === "No") {
+        if (obj.Value === 'No') {
           uniqueParentIDs.add(obj.ParentID);
         }
        });
@@ -980,7 +982,7 @@ export async function Card4_A4(propId, state) {
   const validParentIDS = ParentIDS.join('%2C')
   const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=OpenBalance,gt,0;TenantID,in,(${validParentIDS})&fields=OpenBalance`);
 
-  state(DataFromRequest)
+  state(formatNumber(DataFromRequest))
 }
  
  
