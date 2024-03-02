@@ -751,14 +751,19 @@ export function formatShortNumber(number) {
 
 
 export async function Card3_A1A2(propId, state, ddmmyy) {
-  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,bt,(${propId});Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,false;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,bt,(${propId});Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
- 
+  let AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,bt,(${propId});Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+  let AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,false;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,bt,(${propId});Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+    
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
-  state({percentage: Percentage ? String(Percentage) : '0.00', 
-     A: formatShortNumber(Number(AmountA)), B: formatShortNumber(Number(AmountB))})
+  const output = {
+    percentage: Percentage ? String(Percentage) : '0.00', 
+    A: !AmountA ? '0.00' : formatShortNumber(Number(AmountA)), 
+    B: !AmountB ? '0.00' : formatShortNumber(Number(AmountB))
+   }
+
+  state(output)
 }
  
  
@@ -777,8 +782,13 @@ export async function Card3_A3A4(propId, state, ddmmyy) {
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
-  state({percentage: Percentage ? String(Percentage) : '0.00', 
-     A: formatShortNumber(Number(AmountA)), B: formatShortNumber(Number(AmountB))})
+  const output = {
+    percentage: Percentage ? String(Percentage) : '0.00', 
+    A: !AmountA ? '0.00' : formatShortNumber(Number(AmountA)), 
+    B: !AmountB ? '0.00' : formatShortNumber(Number(AmountB))
+   }
+
+  state(output)
 }
  
 
@@ -796,8 +806,13 @@ export async function Card3_A5A6(propId, state, ddmmyy) {
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
-  state({percentage: Percentage ? String(Percentage) : '0.00', 
-     A: formatShortNumber(Number(AmountA)), B: formatShortNumber(Number(AmountB))})
+  const output = {
+    percentage: Percentage ? String(Percentage) : '0.00', 
+    A: !AmountA ? '0.00' : formatShortNumber(Number(AmountA)), 
+    B: !AmountB ? '0.00' : formatShortNumber(Number(AmountB))
+   }
+
+  state(output)
 }
  
 
