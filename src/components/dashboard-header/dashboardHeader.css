@@ -26,6 +26,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1em;
+  flex-wrap: wrap;
 }   
 .dashboard-header-tabs {
   background-color: transparent;
@@ -45,6 +46,23 @@
   color: var(--colorD);
   border-bottom: 2px solid var(--colorD);
 }
+
+
+#dashboard-header-button {
+  padding: 10px;
+  border-radius: 7px;
+  border:none;
+  outline: none;
+  font-family: 'bold';
+  color: rgba(0,0,0,0.7);
+  background-color: var(--colorC);
+  transition: 0.2s;
+  cursor: pointer;
+}
+#dashboard-header-button:hover {
+  color : var(--colorD);
+}
+
 
 
 

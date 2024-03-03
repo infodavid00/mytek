@@ -40,6 +40,14 @@
  margin-bottom: 1em;
  margin-top: 0.2em;
 }
+.board1-sec1-level1-option {
+  background-color: var(--colorB);
+  color: white;
+}
+.board1-sec1-level1-option:checked, .board1-sec1-level1-select:hover {
+  background-color: var(--colorD);
+  color: white;
+}
 #board1-sec1-level2-title {
  font-size: 17px;
  font-family: 'bold';

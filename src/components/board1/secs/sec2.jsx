@@ -41,11 +41,11 @@ function Level3Cards({data,color,openTable,otInstructions}) {
         <div>Total Balance:</div>
         <div className='board1-sec2-level13-body-children-text2'>${data[2]}</div>
       </div>
-      <div>
+      {/* <div>
         <div>Average Balance:</div>
         <div className='board1-sec2-level13-body-children-text2'>${data[3]}</div>
-      </div>
-      <button className='board1-sec2-level13-body-children-btn' onClick={()=> { openTable(), otInstructions()}}>Show Me</button>
+      </div> */}
+      <button className='board1-sec2-level13-body-children-btn' onClick={()=> { openTable(), otInstructions()}}>More</button>
     </div>
   )
 }
@@ -84,9 +84,9 @@ function Sec2({currentPropertyId}) {
     Card1_A3(currentPropertyId, setlevel3_A3)
     Card1_B3(currentPropertyId, setlevel3_B3)
     Card1_C3(currentPropertyId, setlevel3_C3)
-    Card1_A4(currentPropertyId, setlevel3_A4)
-    Card1_B4(currentPropertyId, setlevel3_B4)
-    Card1_C4(currentPropertyId, setlevel3_C4)
+    // Card1_A4(currentPropertyId, setlevel3_A4)
+    // Card1_B4(currentPropertyId, setlevel3_B4)
+    // Card1_C4(currentPropertyId, setlevel3_C4)
     Card1_D3(currentPropertyId, setlevel3_D3)
     Card1_D1(currentPropertyId, setlevel3_D1)
 

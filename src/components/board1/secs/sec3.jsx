@@ -153,7 +153,8 @@ function Sec3({currentPropertyId}) {
           <div id='board1-sec3-level3-sec2-1'>
             <div id='board1-sec3-level3-bar-title'>{level3_A1A2_PIE}%</div>
             <Level3Bar percentageOfNotLegal={level3_A1A2_PIE} />
-            <div>Legal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorB)'}}></span>
+            <div style={{fontFamily: 'regular'}} >
+             Legal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorB)'}}></span>
              NotLegal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorD)'}}></span>
             </div>
           </div>
@@ -163,7 +164,7 @@ function Sec3({currentPropertyId}) {
             <div id='board1-sec3-level3-sec2-2-boldtxt1'>{level3_A3}</div>
             <div>Total Balance:</div>
             <div id='board1-sec3-level3-sec2-2-boldtxt2'>${level3_A4}</div>
-            <button id='board1-sec3-level3-sec2-2-showmebtn' onClick={()=> setShowTable(true)}>Show Me</button>
+            <button id='board1-sec3-level3-sec2-2-showmebtn' onClick={()=> setShowTable(true)}>More</button>
           </div>
         </div>
       </div>

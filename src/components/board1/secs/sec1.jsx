@@ -101,7 +101,7 @@ function Sec1({setcurrentPropertyId}) {
       </div>
 
       <div className='board1-sec1-level1-body'>
-        <div id='board1-sec1-level2-title'>Previous Three Months Progress Gauge</div>
+        <div id='board1-sec1-level2-title'>Previous Three Months Progress Collected</div>
         <div id='board1-sec1-level2-barssec-body'>
            <div>
              <div>{level2_A1A2.percentage + '%'}</div>
