@@ -342,11 +342,11 @@ export async function Card1_A1(propId, state) {
       if (data) {
         const trimmedData = data.map((elem) => {
         return {
-          propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
+          propertyName : lvl1Data[0].lists.find((e)=> e.PropertyID == String(elem?.PropertyID))?.Name ?? '...',
           FirstName: elem.FirstName,
           LastName: elem.LastName,
           OpenBalance: formatNumber(elem.OpenBalance),
-          };
+          }; 
         });
         state(trimmedData);
       } else {
@@ -387,7 +387,7 @@ export async function Card1_B1(propId, state) {
       if (data) {
         const trimmedData = data.map((elem) => {
         return {
-          propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
+          propertyName : lvl1Data[0].lists.find((e)=> e.PropertyID == String(elem?.PropertyID))?.Name ?? '...',
           FirstName: elem.FirstName,
           LastName: elem.LastName,
           OpenBalance: formatNumber(elem.OpenBalance),
@@ -431,7 +431,7 @@ export async function Card1_C1(propId, state) {
       if (data) {
         const trimmedData = data.map((elem) => {
         return {
-          propertyName : lvl1Data[0].lists.find((elem) => elem.PropertyID === propId)['Name'],
+          propertyName : lvl1Data[0].lists.find((e)=> e.PropertyID == String(elem?.PropertyID))?.Name ?? '...',
           FirstName: elem.FirstName,
           LastName: elem.LastName,
           OpenBalance: formatNumber(elem.OpenBalance),
@@ -995,7 +995,7 @@ export async function FETCHPARENTIDSFORCARD4PIECHARTNOTLEGAL(state, endpoint) {
 export async function Card4_A4(propId, state) {
   const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`);
   const validParentIDS = ParentIDS.join('%2C')
-  const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=TenantID,in,(${validParentIDS})&fields=OpenBalance`);
+  const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=OpenBalance,ge,0;TenantID,in,(${validParentIDS})&fields=OpenBalance`);
   state(formatNumber(DataFromRequest))
 }
  

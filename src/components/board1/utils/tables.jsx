@@ -6,7 +6,6 @@ import queryFormater from '../secs/queryFormater.jsx';
 
 function Tables({ closeNav, PropertyId, Index }) {
   const [responseState, setResponseState] = useState(null);
-
   useEffect(() => {
      if (Index === 1)  Card1_A1(queryFormater(PropertyId), setResponseState);
      if (Index === 2)  Card1_B1(queryFormater(PropertyId), setResponseState);
