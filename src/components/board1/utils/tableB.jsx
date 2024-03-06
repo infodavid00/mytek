@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './tables.css';
 import { Card4_A5 } from '../../../utils/boards/board1';
 import numeral from 'numeral';
+import queryFormater from '../secs/queryFormater.jsx'
 
 
 function Tables({ closeNav, PropertyId }) {
   const [responseState, setResponseState] = useState(null);
 
   useEffect(() => {
-    Card4_A5(PropertyId, setResponseState);
+    Card4_A5(queryFormater(PropertyId), setResponseState);
   }, []);
 
   let response = []

@@ -751,9 +751,9 @@ export function formatShortNumber(number) {
 
 
 export async function Card3_A1A2(propId, state, ddmmyy) {
-  let AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  let AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,false;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-    
+  let AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
+  let AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
@@ -776,9 +776,9 @@ export async function Card3_A1A2(propId, state, ddmmyy) {
 
  
 export async function Card3_A3A4(propId, state, ddmmyy) {
-  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,false;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
- 
+  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
+  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
@@ -800,8 +800,8 @@ export async function Card3_A3A4(propId, state, ddmmyy) {
 
   
 export async function Card3_A5A6(propId, state, ddmmyy) {
-  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=IsFullyAllocated,eq,false;TransactionDate,bt,(${startOfMonth(ddmmyy)}T00%3A00%3A00,${endOfMonth(ddmmyy)}T00%3A00);PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
+  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
  
   let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
@@ -996,7 +996,6 @@ export async function Card4_A4(propId, state) {
   const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`);
   const validParentIDS = ParentIDS.join('%2C')
   const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=TenantID,in,(${validParentIDS})&fields=OpenBalance`);
-
   state(formatNumber(DataFromRequest))
 }
  
@@ -1075,7 +1074,6 @@ export async function Card4_A5(propId, state) {
   state(null)
   const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`, true);
   const validParentIDS = ParentIDS.join('%2C')
-  const DataFromRequest = await FETCHTABLEDATAFORA5(state, `/Tenants?filters=TenantID,in,(${validParentIDS})&fields=Comment,LastNameFirstName,OpenBalance`);
+  const DataFromRequest = await FETCHTABLEDATAFORA5(state, `/Tenants?filters=OpenBalance,ge,0;TenantID,in,(${validParentIDS})&fields=Comment,LastNameFirstName,OpenBalance,TenantID`);
   state(DataFromRequest)
 }
- 

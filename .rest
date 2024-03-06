@@ -8,6 +8,8 @@
 #  "password": "Bushburg-AP1"
 # }
 
-# GET https://cors-proxy-lgy8.onrender.com/?url=https://bbp.api.rentmanager.com/Tenants?filters=OpenBalance,gt,0;TenantID,in,(1%2C5%2C9%2C7%2C3%2C1%2C5)&fields=Comment,LastNameFirstName,OpenBalance
+
+
+# GET https://cors-proxy-lgy8.onrender.com/?url=https://bbp.api.rentmanager.com/Tenants?filters=TenantID,in,(130,170,198)&fields=OpenBalance
 # Content-Type: application/json
-# X-RM12Api-ApiToken: CcZL4GY6rYS404Vp5Erw1g2CABuY8lyDxfCiXpLZcXa2P9IesPVgDXiHqAqYxWKsz4LCVG7a-BPlvEZ1tDlW6FxkgDz0XrZ9KdYl8yj5BD4=
+# X-RM12Api-ApiToken: 6On9x5FDUfFFOcc8DzDcnCaIXwx690l2kj4rFqb8mVhB1RrhcJYpfhMvrlvoRAVRzR4fpblFjfU7UHQ3i6z4m-kmSTMVrQTyMhvG7VZIJ6w=
