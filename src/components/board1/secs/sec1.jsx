@@ -130,9 +130,12 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
 
     if (BoardshouldStartQuery) {
     console.log('from section 1 = ' , queryFormater(PropertNameSelectedValue))
-    // //   Card3_A1A2(PropertNameSelectedValue, setlevel2_A1A2, new Date(level2barsecDDMMYY()[2]['raw']));
-    // //   Card3_A3A4(PropertNameSelectedValue, setlevel2_A1A4, new Date(level2barsecDDMMYY()[1]['raw']));
-    // //   Card3_A5A6(PropertNameSelectedValue, setlevel2_A5A6, new Date(level2barsecDDMMYY()[0]['raw']));
+      // 
+      // 
+      // 
+      Card3_A1A2(queryFormater(PropertNameSelectedValue), setlevel2_A1A2, new Date(level2barsecDDMMYY()[2]['raw']));
+      Card3_A3A4(queryFormater(PropertNameSelectedValue), setlevel2_A1A4, new Date(level2barsecDDMMYY()[1]['raw']));
+      Card3_A5A6(queryFormater(PropertNameSelectedValue), setlevel2_A5A6, new Date(level2barsecDDMMYY()[0]['raw']));
      }
   }, [BoardshouldStartQuery, BoardsetshouldStartQuery]);
 

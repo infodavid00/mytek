@@ -39,9 +39,12 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
   useEffect(() => {
    if (shouldStartQuery) {
     console.log('from section 3 = ' , queryFormater(currentPropertyId))
-  //   Card4_A1A2_PIE(currentPropertyId, setlevel3_A1A2_PIE)
-  //   Card4_A3(currentPropertyId, setlevel3_A3)
-    // Card4_A4(currentPropertyId, setlevel3_A4)
+    //
+    //  
+    // 
+    Card4_A1A2_PIE(queryFormater(currentPropertyId), setlevel3_A1A2_PIE)
+    Card4_A3(queryFormater(currentPropertyId), setlevel3_A3)
+    Card4_A4(queryFormater(currentPropertyId), setlevel3_A4)
    }
   }, [shouldStartQuery]); 
 

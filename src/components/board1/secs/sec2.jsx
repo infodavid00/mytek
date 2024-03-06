@@ -80,23 +80,23 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
    if (shouldStartQuery) {
     console.log('from section 2 = ' , queryFormater(currentPropertyId))
     setLastupdated(getCurrentFormattedDateAndTime())
-  //   Card1_A2(currentPropertyId, setlevel3_A2)
-  //   Card1_B2(currentPropertyId, setlevel3_B2)
-  //   Card1_C2(currentPropertyId, setlevel3_C2)
-  //   Card1_A3(currentPropertyId, setlevel3_A3)
-  //   Card1_B3(currentPropertyId, setlevel3_B3)
-  //   Card1_C3(currentPropertyId, setlevel3_C3)
-  //   // Card1_A4(currentPropertyId, setlevel3_A4)
-  //   // Card1_B4(currentPropertyId, setlevel3_B4)
-  //   // Card1_C4(currentPropertyId, setlevel3_C4)
-  //   Card1_D3(currentPropertyId, setlevel3_D3)
-  //   Card1_D1(currentPropertyId, setlevel3_D1)
+    Card1_A2(queryFormater(currentPropertyId), setlevel3_A2)
+    Card1_B2(queryFormater(currentPropertyId), setlevel3_B2)
+    Card1_C2(queryFormater(currentPropertyId), setlevel3_C2)
+    Card1_A3(queryFormater(currentPropertyId), setlevel3_A3)
+    Card1_B3(queryFormater(currentPropertyId), setlevel3_B3)
+    Card1_C3(queryFormater(currentPropertyId), setlevel3_C3)
+    Card1_A4(queryFormater(currentPropertyId), setlevel3_A4)
+    Card1_B4(queryFormater(currentPropertyId), setlevel3_B4)
+    Card1_C4(queryFormater(currentPropertyId), setlevel3_C4)
+    Card1_D3(queryFormater(currentPropertyId), setlevel3_D3)
+    Card1_D1(queryFormater(currentPropertyId), setlevel3_D1)
 
-  //   Card2_A1(currentPropertyId, setlevel1_A1)
-  //   Card2_A2(currentPropertyId, setlevel1_A2) 
+    Card2_A1(queryFormater(currentPropertyId), setlevel1_A1)
+    Card2_A2(queryFormater(currentPropertyId), setlevel1_A2) 
     
-  //   Card2_A3(currentPropertyId, setlevel2_A3)
-  //   Card2_A4(currentPropertyId, setlevel2_A4)
+    Card2_A3(queryFormater(currentPropertyId), setlevel2_A3)
+    Card2_A4(queryFormater(currentPropertyId), setlevel2_A4)
    }
   }, [shouldStartQuery]); 
    
