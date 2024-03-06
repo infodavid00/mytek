@@ -26,7 +26,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1em;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }   
 .dashboard-header-tabs {
   background-color: transparent;
@@ -77,8 +77,11 @@
   gap: 2.5em;
 }   
 }
+
 @media (max-width:760px) {
 #dashboard-header-tabs {
-  margin-top: 1em;
+  margin-top: 0em;
+  justify-content: center;
+  overflow: auto;
 }   
 }

@@ -6,6 +6,7 @@ import './sec3.css'
 import { PieChart } from 'react-minimal-pie-chart';
 import { Card4_A1A2_PIE, Card4_A3, Card4_A4 } from '../../../utils/boards/board1.jsx';
 import TableB from '../utils/tableB.jsx'
+import queryFormater from './queryFormater.jsx'
 
 // function Level1ProgressBar({percentage}) {
 //   const height  = `${percentage.split('.')[0]}%`
@@ -29,19 +30,20 @@ function Level3Bar({percentageOfNotLegal}) {
   )
 }
 
-function Sec3({currentPropertyId}) {
+function Sec3({currentPropertyId, shouldStartQuery}) {
   const [showTable, setShowTable] = useState(false)
   const [level3_A1A2_PIE, setlevel3_A1A2_PIE] = useState('...')
   const [level3_A3, setlevel3_A3] = useState('...')
   const [level3_A4, setlevel3_A4] = useState('...')
 
   useEffect(() => {
-   if (currentPropertyId) {
-    Card4_A1A2_PIE(currentPropertyId, setlevel3_A1A2_PIE)
-    Card4_A3(currentPropertyId, setlevel3_A3)
-    Card4_A4(currentPropertyId, setlevel3_A4)
+   if (shouldStartQuery) {
+    console.log('from section 3 = ' , queryFormater(currentPropertyId))
+  //   Card4_A1A2_PIE(currentPropertyId, setlevel3_A1A2_PIE)
+  //   Card4_A3(currentPropertyId, setlevel3_A3)
+    // Card4_A4(currentPropertyId, setlevel3_A4)
    }
-  }, [currentPropertyId]); 
+  }, [shouldStartQuery]); 
 
   return (
     <div id='board1-sec3'>

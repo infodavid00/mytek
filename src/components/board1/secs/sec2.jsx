@@ -5,6 +5,7 @@ import './sec2.css'
 import Tables from '../utils/tables'
 import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4 } from '../../../utils/boards/board1'
 import { currentMonthName, getCurrentFormattedDateAndTime } from '../../../utils/dates/date.jsx'
+import queryFormater from './queryFormater.jsx'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -50,7 +51,7 @@ function Level3Cards({data,color,openTable,otInstructions}) {
   )
 }
 
-function Sec2({currentPropertyId}) {
+function Sec2({currentPropertyId, shouldStartQuery}) {
   const [showTable, setShowTable] = useState(false)
 
   const [tableData, setTableData] = useState(null)
@@ -76,27 +77,28 @@ function Sec2({currentPropertyId}) {
 
 
   useEffect(() => {
-   if (currentPropertyId) {
+   if (shouldStartQuery) {
+    console.log('from section 2 = ' , queryFormater(currentPropertyId))
     setLastupdated(getCurrentFormattedDateAndTime())
-    Card1_A2(currentPropertyId, setlevel3_A2)
-    Card1_B2(currentPropertyId, setlevel3_B2)
-    Card1_C2(currentPropertyId, setlevel3_C2)
-    Card1_A3(currentPropertyId, setlevel3_A3)
-    Card1_B3(currentPropertyId, setlevel3_B3)
-    Card1_C3(currentPropertyId, setlevel3_C3)
-    // Card1_A4(currentPropertyId, setlevel3_A4)
-    // Card1_B4(currentPropertyId, setlevel3_B4)
-    // Card1_C4(currentPropertyId, setlevel3_C4)
-    Card1_D3(currentPropertyId, setlevel3_D3)
-    Card1_D1(currentPropertyId, setlevel3_D1)
+  //   Card1_A2(currentPropertyId, setlevel3_A2)
+  //   Card1_B2(currentPropertyId, setlevel3_B2)
+  //   Card1_C2(currentPropertyId, setlevel3_C2)
+  //   Card1_A3(currentPropertyId, setlevel3_A3)
+  //   Card1_B3(currentPropertyId, setlevel3_B3)
+  //   Card1_C3(currentPropertyId, setlevel3_C3)
+  //   // Card1_A4(currentPropertyId, setlevel3_A4)
+  //   // Card1_B4(currentPropertyId, setlevel3_B4)
+  //   // Card1_C4(currentPropertyId, setlevel3_C4)
+  //   Card1_D3(currentPropertyId, setlevel3_D3)
+  //   Card1_D1(currentPropertyId, setlevel3_D1)
 
-    Card2_A1(currentPropertyId, setlevel1_A1)
-    Card2_A2(currentPropertyId, setlevel1_A2) 
+  //   Card2_A1(currentPropertyId, setlevel1_A1)
+  //   Card2_A2(currentPropertyId, setlevel1_A2) 
     
-    Card2_A3(currentPropertyId, setlevel2_A3)
-    Card2_A4(currentPropertyId, setlevel2_A4)
+  //   Card2_A3(currentPropertyId, setlevel2_A3)
+  //   Card2_A4(currentPropertyId, setlevel2_A4)
    }
-  }, [currentPropertyId]); 
+  }, [shouldStartQuery]); 
    
   return (
     <div id='board1-sec2'>
