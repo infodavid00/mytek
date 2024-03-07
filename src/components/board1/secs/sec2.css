@@ -40,16 +40,41 @@
 .board1-sec2-level1card-title {
   font-size: 21px;
   font-family: 'regular';
-  color: rgba(230,230,230,1)
+  color: rgba(230,230,230,1);
+  text-align: center;
 }
 .board1-sec2-level1card-text {
   font-size: 15px;
   font-family: 'regular';
-  color: rgba(220,220,220,1)
+  color: rgba(220,220,220,1);
+  text-align: center;
 }
 .board1-sec2-level1card-value {
   font-size: 21px;
   font-family: 'regular';
+  text-align: center;
+}
+.board1-sec2-level1card-btn {
+  padding: 10px;
+  border:none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: black;
+  font-family: 'regular';
+  font-size: 16px;
+  background-color:var(--colorC);
+  display: block;
+  margin:auto;
+  margin-top: 1em;
+  width: 100px;
+  text-align: center;
+  transition: 0.1s;
+}
+.board1-sec2-level1card-btn:hover {
+  background-color: var(--colorB);
+  color: white;
+  font-family: 'bold';
 }
 
 

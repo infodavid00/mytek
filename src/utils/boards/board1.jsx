@@ -531,13 +531,13 @@ export async function Card1_D1(propId, state) {
 
 
 
-
+ 
 
 export async function Card2_A1(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=IsFullyAllocated,eq,true;TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;PropertyID,${propId};Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -584,7 +584,7 @@ export async function Card2_A2(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;PropertyID,${propId};AccountType,eq,Customer;IsFullyAllocated,eq,true`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -614,6 +614,102 @@ export async function Card2_A2(propId, state) {
     state('!!!');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function Card2_A5(propId, state) {
+  state(null)
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      if (data) {
+        state(data);
+      } else {
+        state('0');
+      }
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state(false);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function Card2_A6(propId, state) {
+  state(null)
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      if (data) {
+        state(data);
+      } else {
+        state('0');
+      }
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state(false);
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -659,13 +755,17 @@ export async function fetchAndProcessDataForPercentageF(propId, state, endpoint)
 
 
 export async function Card2_A3(propId, state) {
-  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};IsFullyAllocated,eq,true;TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,ni,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`); 
- 
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});Unit.UnitTypeID,in,(1%2C%205%2C%206%2C%207%2C%208%2C%209%2C%2010%2C%2014%2C%2015%2C%2016%2C%2021%2C%2022%2C%2023%2C%2024%2C%2025%2C%2026%2C%2027%2C%2028%2C%2029%2C%2030%2C%2031%2C%2032%2C%2033%2C%2034%2C%2035%2C%2038%2C%2039%2C%2040%2C%2041%2C%2042%2C%2043%2C%2044%2C%2045%2C%2046%2C%2047%2C%2048%2C%2049%2C%2050%2C%2051%2C%2052%2C%2053)&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,TransactionDate,UnitID`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};AmountAllocated,gt,0;TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});Unit.UnitTypeID,in,(1%2C%205%2C%206%2C%207%2C%208%2C%209%2C%2010%2C%2014%2C%2015%2C%2016%2C%2021%2C%2022%2C%2023%2C%2024%2C%2025%2C%2026%2C%2027%2C%2028%2C%2029%2C%2030%2C%2031%2C%2032%2C%2033%2C%2034%2C%2035%2C%2038%2C%2039%2C%2040%2C%2041%2C%2042%2C%2043%2C%2044%2C%2045%2C%2046%2C%2047%2C%2048%2C%2049%2C%2050%2C%2051%2C%2052%2C%2053)&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,TransactionDate,UnitID`); 
+
+  if (AmountA && AmountB) {
   let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
   state(Percentage ? String(Percentage) : '0.00');
+  } else {
+     state('0.00');
+  }
 }
 
 
@@ -676,14 +776,43 @@ export async function Card2_A3(propId, state) {
 
 
 export async function Card2_A4(propId, state) {
-  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};IsFullyAllocated,eq,true;TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,in,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
-  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};TransactionDate,gt,${startOfMonth()}T00%3A00%3A00;AccountType,eq,Customer;Unit.UnitTypeID,in,(32%2C11%2C3%2C2%2C36%2C19%2C12%2C4)`);
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});Unit.UnitTypeID,in,(2%2C%203%2C%2011%2C%2012%2C%2036%2C%2037)&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,TransactionDate,UnitID`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=PropertyID,${propId};AmountAllocated,gt,0;Unit.UnitTypeID,in,(2%2C%203%2C%2011%2C%2012%2C%2036%2C%2037);TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()})&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,TransactionDate,UnitID`);
  
+  if (AmountA && AmountB) {
   let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
   state(Percentage ? String(Percentage) : '0.00');
+  } else {
+     state('0.00');
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+export async function Card2_A7(propId, state) {
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+  if (AmountA && AmountB) {
+  let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
+  const Percentage = percentage.toFixed(2)
+
+  state(Percentage ? String(Percentage) : '0.00');
+  } else {
+     state('0.00');
+  }
+}
+
 
 
 
