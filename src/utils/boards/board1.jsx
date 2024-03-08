@@ -537,7 +537,7 @@ export async function Card2_A1(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -584,7 +584,7 @@ export async function Card2_A2(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -801,8 +801,8 @@ export async function Card2_A4(propId, state) {
 
 
 export async function Card2_A7(propId, state) {
-  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
-  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
   if (AmountA && AmountB) {
   let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
   const Percentage = percentage.toFixed(2)
