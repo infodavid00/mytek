@@ -10,8 +10,8 @@ function DashboardHeader({active}) {
 
   const lists = [
     {title:'Collections Dashboard' , index:1},
-    {title:'Board2' , index:2},
-    {title:'Board3' , index:3},
+    {title:'Leasing' , index:2},
+    {title:'Operations' , index:3},
   ]
 
   return (

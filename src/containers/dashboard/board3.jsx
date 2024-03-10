@@ -2,8 +2,10 @@
 import React, {useState, useEffect} from 'react'
 import '../../assets/stylsheets/boards.css'
 import DashboardHeader from '../../components/dashboard-header/dashboardHeader.jsx'
+import Board3Component from '../../components/board3/board-3.jsx'
 import validateUser from '../../utils/user/validateUser.jsx'
 import {Loader}  from '../../components/loader/loader.jsx'
+import Footer from '../../components/footer/footer.jsx'
 
 function Board3({active = 3}) {
   const [wasAuthenticated, setwasAuthenticated] = useState(null);
@@ -16,7 +18,7 @@ function Board3({active = 3}) {
   }, []);
   
   return (
-    <div id='body-boards'>
+    <div id='body-boards' style={{backgroundColor:'white'}}>
       <DashboardHeader active={active} />
       {loading ? (
       <>
@@ -26,9 +28,10 @@ function Board3({active = 3}) {
       </>
       ) : (
       <>
-      {wasAuthenticated &&  '' }
+      {wasAuthenticated &&  <Board3Component /> }
+      <Footer color={'var(--colorC)'} />
       </>
-     )
+     ) 
      }
     </div>
   )

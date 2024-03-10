@@ -804,7 +804,7 @@ export async function Card2_A7(propId, state) {
   const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
   const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
   if (AmountA && AmountB) {
-  let percentage = AmountB > AmountA ? (AmountA / AmountB) * 100 : 100;
+  let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
   const Percentage = percentage.toFixed(2)
 
   state(Percentage ? String(Percentage) : '0.00');
@@ -880,10 +880,11 @@ export function formatShortNumber(number) {
 
 
 export async function Card3_A1A2(propId, state, ddmmyy) {
-  let AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
-  let AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+  let AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated&pagesize=1000000000`) ?? 0;
+  let AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID&pagesize=1000000000`) ?? 0;
 
-  let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
+  const helper  = AmountA === 0 ||  AmountA > AmountB ? (AmountB / AmountA) * 100 : 100;
+  let percentage = String(helper) === 'NaN'  ? 0 : helper;
   const Percentage = percentage.toFixed(2)
 
   const output = {
@@ -905,10 +906,11 @@ export async function Card3_A1A2(propId, state, ddmmyy) {
 
  
 export async function Card3_A3A4(propId, state, ddmmyy) {
-  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
-  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated&pagesize=1000000000`) ?? 0;
+  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID&pagesize=1000000000`) ?? 0;
 
-  let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
+  const helper  = AmountA === 0 ||  AmountA > AmountB ? (AmountB / AmountA) * 100 : 100;
+  let percentage = String(helper) === 'NaN'  ? 0 : helper;
   const Percentage = percentage.toFixed(2)
 
   const output = {
@@ -929,10 +931,11 @@ export async function Card3_A3A4(propId, state, ddmmyy) {
 
   
 export async function Card3_A5A6(propId, state, ddmmyy) {
-  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
-  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
- 
-  let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
+  const AmountA = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated&pagesize=1000000000`) ?? 0;
+  const AmountB = await fetchAndProcessDataForPercentageFCARD3(propId, state, `/Charges?filters=CreateDate,bt,(${startOfMonth(ddmmyy)}%2C${endOfMonth(ddmmyy)});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID&pagesize=1000000000`) ?? 0;
+   
+  const helper  = AmountA === 0 ||  AmountA > AmountB ? (AmountB / AmountA) * 100 : 100;
+  let percentage = String(helper) === 'NaN'  ? 0 : helper;
   const Percentage = percentage.toFixed(2)
 
   const output = {
