@@ -2,6 +2,16 @@
 import React, {useState, useEffect} from 'react'
 import './board-2.css'
 
+function ProgressBar({title, shouldBeLarge, percentage}) {
+  return (
+    <div className='board2-levels-container-big-box-f3-cont' style={{fontSize: shouldBeLarge ? '22px' : '15px'}}> 
+      {title} 
+      <div className='board2-levels-container-big-box-f3-progress-bd' style={{borderRadius: shouldBeLarge ? '13px' : '9px' }}>
+       <div className='board2-levels-container-big-box-f3-progress-inner' style={{borderRadius: shouldBeLarge ? '13px' : '9px', padding: shouldBeLarge ? '9px' : '5px' }}></div>
+      </div>
+    </div>
+  )
+}
 
 function Board2Component() {
   // const [currentPropertyId, setcurrentPropertyId] = useState(lvl1Data[0].lists[0].PropertyID)
@@ -27,7 +37,22 @@ function Board2Component() {
 
      {/* level1 */}
      <div className='board2-levels-container'>
-       <div className='board2-levels-container-big-box'></div>
+       <div className='board2-levels-container-big-box'>
+         <div className='board2-levels-container-big-box-header'>Vacancies</div>
+         <div className='board2-levels-container-big-box-f2-cont'>
+           <div className='board2-levels-container-big-box-f2-text'>25</div>
+         </div>
+         <div>
+           <ProgressBar title={'0-30 Days'} shouldBeLarge={false} percentage={'50'} />
+           <ProgressBar title={'30-60 Days'}  shouldBeLarge={false} percentage={'50'} />
+           <ProgressBar title={'60+ Days'}  shouldBeLarge={false} percentage={'50'} />
+         </div>
+         <div className='board2-levels-container-big-box-f4-cont'> 
+           <div className='board2-levels-container-big-box-f4-txt'>Monthly Rent Loss: <span style={{color:'var(--colorD)', marginLeft: 10}}>23,000$</span></div>
+           <button className='board2-levels-container-big-box-f4-btn'>More {'>'} </button>
+         </div>
+       </div>
+
        <div className='board2-levels-container-big-box'></div>
        <div className='board2-levels-container-big-box'></div>
      </div>

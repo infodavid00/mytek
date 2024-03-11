@@ -96,9 +96,68 @@
  width: 100%;
  background-color: var(--colorC);
 }
+.board2-levels-container-big-box-header {
+ font-size: 23px;
+ font-family: 'bold';
+}
 
 
+.board2-levels-container-big-box-f2-cont {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0em 0.8em;
+}
+.board2-levels-container-big-box-f2-text {
+ font-size: 40px;
+ font-family: 'extrabold';   
+ color: var(--colorD);  
+}
 
+
+.board2-levels-container-big-box-f3-cont  {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ align-items: center;
+ gap: 0.7em; 
+ font-family: 'regular';
+}
+.board2-levels-container-big-box-f3-progress-bd {
+ width: 140px;
+ background-color: var(--colorD);
+ border-radius: 9px;
+}
+.board2-levels-container-big-box-f3-progress-inner { 
+ background-color: var(--colorB);
+ padding: 6px;
+ border-radius: 9px;
+ width: 50%;
+}
+
+
+.board2-levels-container-big-box-f4-cont {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0em 0.2em; 
+ margin-top: 1em;
+}
+.board2-levels-container-big-box-f4-txt {
+ font-size: 21px;  
+ font-family: 'regular';  
+}
+.board2-levels-container-big-box-f4-btn {
+ background-color: transparent;
+ border: none;
+ outline: none;
+ font-size: 18px;
+ font-family: 'bold';
+}
 
 
 
