@@ -67,6 +67,7 @@
  font-family: 'bold';
  padding:5px;
  padding-right: 0.5em;
+ cursor: pointer;
 }
 #board2-header-btn-cont-property-drpdwn {
  border: none;
@@ -77,6 +78,7 @@
  color: var(--colorD);
  padding:5px;
  padding-left: 0.7em;
+ cursor: pointer;
 }
 
 
@@ -157,7 +159,121 @@
  outline: none;
  font-size: 18px;
  font-family: 'bold';
+ cursor: pointer;
 }
+
+
+.board2-levels-container-big-box-googlereviews-cont {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ margin-top: 0.3em;
+}
+
+
+
+
+.board2-levels-container-big-box-ur-cont-subc {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;   
+ overflow: auto;
+ font-size: 14px;
+ margin-top: 1.5em;
+}
+.board2-levels-container-big-box-ur-cont-subc-s {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ width: 100%;
+}
+.board2-levels-container-big-box-ur-cont-subc-s-1 {
+ background-color: #ccc;
+ width: 50% ;
+ border: 1px solid #ccc;
+ font-family: 'regular';
+}
+.board2-levels-container-big-box-ur-cont-subc-s-2 {
+ border: 1px solid #ccc;
+ background-color: var(--colorA);
+ width: 50% ;
+ text-align: center;
+ border-bottom: 1px solid transparent;
+ font-family: 'regular';
+}
+
+
+
+
+.board2-levels-container-big-box-uv-subcont {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ gap: 1em;
+ margin: auto;
+ justify-content: center;
+}
+.board2-levels-container-big-box-uv-subcont-t1 {
+ font-size: 18px;
+ font-family: 'regular';
+}
+.board2-levels-container-big-box-uv-subcont-t2 {
+ font-size: 26.3px;
+ font-family: 'extrabold';
+ color: var(--colorD);
+}
+
+
+
+.board2-levels-container-big-box-appu-cont-subc {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-self: center;
+}
+.board2-levels-container-big-box-appu-cont-subc-s {
+ width: 75%;
+ margin: auto;
+}
+.blcbbappu-css1, .blcbbappu-css2 {
+ border: none;
+ background-color: transparent;
+ text-align: center;
+ font-size: 12px;
+}
+.blcbbappu-css2 {
+ color: var(--colorD);
+}
+
+
+
+.board2-levels-container-big-box-seperate {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ /* padding: 10px; */
+ border: 1px solid transparent;
+ gap: 0.8em;
+ width: 100%;
+ background-color: white;
+}
+.board2-levels-container-big-box-seperate-1 {
+ width: 60%;
+ border: 1px solid var(--colorD);
+ padding: 10px;
+ background-color: var(--colorC);
+}
+.board2-levels-container-big-box-seperate-2 {
+ width: 40%;
+ padding: 10px;
+ border: 1px solid var(--colorD);
+ background-color: var(--colorC);
+}
+
 
 
 

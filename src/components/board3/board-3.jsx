@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from 'react'
 import '../board2/board-2.css'
+import {ChevronDown} from 'react-feather'
 
 
 function Board3Component() {
@@ -19,7 +20,7 @@ function Board3Component() {
        </div>
        <div id='board2-header-btn-cont'>
           <button id='board2-header-btn-cont-property'>Property</button>
-          <button id='board2-header-btn-cont-property-drpdwn'> c </button>
+          <button id='board2-header-btn-cont-property-drpdwn'> <ChevronDown fill={'var(--colorD)'} width={22} height={22} /> </button>
        </div>
      </div>
      {/* header */}
