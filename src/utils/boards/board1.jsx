@@ -1042,7 +1042,7 @@ export async function Card4_A3(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/80/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -1051,15 +1051,7 @@ export async function Card4_A3(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      let DATALENGTH = 0;
-      if (data) {
-       const uniqueParentIDs = new Set();
-       data.forEach(obj => {
-         uniqueParentIDs.add(obj.ParentID);
-       });
-       const uniqueArray = Array.from(uniqueParentIDs);
-       DATALENGTH = uniqueArray.length;
-      }
+      const DATALENGTH = data?.Rows.length;
       state(formatNumber(DATALENGTH));
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -1205,10 +1197,38 @@ export async function FETCHPARENTIDSFORCARD4PIECHARTNOTLEGAL(state, endpoint) {
 
 
 export async function Card4_A4(propId, state) {
-  const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`);
-  const validParentIDS = ParentIDS.join('%2C')
-  const DataFromRequest = await FETCHPARENTIDSFORCARD4B(state, `/Tenants?filters=OpenBalance,ge,0;TenantID,in,(${validParentIDS})&fields=OpenBalance`);
-  state(formatNumber(DataFromRequest))
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/80/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      const AMOUNT = data.Rows?.reduce((accumulator,elem) => {
+        const am = parseFloat(elem.Balance.replace(/,/g, ''))
+        return am + accumulator
+      } ,0)
+      console.log('Legal in action', AMOUNT)
+      let Amount = String(AMOUNT)
+      if (Amount.includes('.')) {
+        const splittedAM = Amount.split('.');
+        splittedAM[1] = splittedAM[1].slice(0,2)
+        Amount = splittedAM.join('.')
+      }
+      state(data ? formatNumber(Amount) : '0');
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
 }
  
  
@@ -1284,8 +1304,29 @@ export async function FETCHTABLEDATAFORA5(state, endpoint) {
 
 export async function Card4_A5(propId, state) {
   state(null)
-  const ParentIDS = await FETCHPARENTIDSFORCARD4(state, `/Tenants/UserDefinedValues?filters=UserDefinedFieldID,eq,60;Value,eq,Yes;Tenant.PropertyID,${propId}&fields=ParentID,Property,Tenant,Value`, true);
-  const validParentIDS = ParentIDS.join('%2C')
-  const DataFromRequest = await FETCHTABLEDATAFORA5(state, `/Tenants?filters=OpenBalance,ge,0;TenantID,in,(${validParentIDS})&fields=Comment,LastNameFirstName,OpenBalance,TenantID`);
-  state(DataFromRequest)
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/80/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+     const data = await response.json();
+      const R = data?.Rows?.map(elem => {
+        return {
+         Tenant: elem.Tenant,
+         Balance: elem.Balance,
+         Note: elem.Note
+        }
+      })
+      state(R);
+      } else {
+        state('0');
+      }
+  } catch (error) {
+    state(false);
+  }
 }

@@ -43,8 +43,8 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
     //  
     // 
     Card4_A1A2_PIE(queryFormater(currentPropertyId), setlevel3_A1A2_PIE)
-    Card4_A3(queryFormater(currentPropertyId), setlevel3_A3)
-    Card4_A4(queryFormater(currentPropertyId), setlevel3_A4)
+    Card4_A3(currentPropertyId, setlevel3_A3)
+    Card4_A4(currentPropertyId, setlevel3_A4)
    }
   }, [shouldStartQuery]); 
 
@@ -138,15 +138,15 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
       <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
         <div className='board1-sec3-level2-children'>
           <div className='board1-sec3-level2-children-title'>Total Arrears:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'grey'}}>$5,046,519.91</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'grey'}}>$0.00</div>
         </div>
         <div className='board1-sec3-level2-children'>
           <div className='board1-sec3-level2-children-title'>Total Prepaid:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>($813,490.79)</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>($0.00)</div>
         </div>
         <div className='board1-sec3-level2-children'>
           <div className='board1-sec3-level2-children-title'>Arrears Collected MTD:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>$553,783.23</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>$0.00</div>
         </div>
       </div>
       {/* level 2 */}

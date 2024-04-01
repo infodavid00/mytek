@@ -7,6 +7,7 @@ import queryFormater from '../secs/queryFormater.jsx'
 
 function Tables({ closeNav, PropertyId }) {
   const [responseState, setResponseState] = useState(null);
+  const formatNumber = num => numeral(Math.floor(num)).format("0,0");
 
   useEffect(() => {
     Card4_A5(queryFormater(PropertyId), setResponseState);
@@ -14,18 +15,18 @@ function Tables({ closeNav, PropertyId }) {
 
   let response = []
   const nullresponse = [
-      { '#' : 0,  Name: 'Wait', OpenBalance: 'Wait', Comment: 'Wait' },
+      { '#' : 0,  Tenant: 'Wait', Balance: 'Wait', Note: 'Wait' },
     ];
 
   if (typeof responseState === 'object') {
     response = responseState;
   }  else if (responseState === '0') {
     response = [
-      { '#' : 0,  Name: 'N/A', OpenBalance: 'N/A', Comment: 'N/A' },
+      { '#' : 0,  Tenant: 'N/A', Balance: 'N/A', Note: 'N/A' },
     ];
   } else {
     response = [
-      { '#' : 0,  Name: 'Error', OpenBalance: 'Error', Comment: 'Error' },
+      { '#' : 0,  Tenant: 'Error', Balance: 'Error', Note: 'Error' },
     ];
   }
 
@@ -39,25 +40,25 @@ function Tables({ closeNav, PropertyId }) {
           <thead>
             <tr>
               <th className='table-boards-11-tablecontainer-thtd'>#</th>
-              <th className='table-boards-11-tablecontainer-thtd'>Name</th>
-              <th className='table-boards-11-tablecontainer-thtd'>OpenBalance</th>
-              <th className='table-boards-11-tablecontainer-thtd'>Comment</th>
+              <th className='table-boards-11-tablecontainer-thtd'>Tenant</th>
+              <th className='table-boards-11-tablecontainer-thtd'>Balance</th>
+              <th className='table-boards-11-tablecontainer-thtd'>Note</th>
             </tr>
           </thead>
           <tbody>
-            {responseState !== null ? response.slice().sort((a, b) => a.Name.localeCompare(b.Name)).map((item, index) => (
+            {responseState !== null ? response.slice().sort((a, b) => a.Tenant.localeCompare(b.Tenant)).map((item, index) => (
               <tr key={index}>
                 <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.Name}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>${numeral(item.OpenBalance).format("0,0")}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.Comment}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.Tenant}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>${formatNumber(item.Balance)}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.Note}</td>
               </tr>
             )) : nullresponse.map((item, index) => (
               <tr key={index}>
                 <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.Name}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.Comment}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.Tenant}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>${formatNumber(item.Balance)}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>{item.Note}</td>
               </tr>
             ))}
           </tbody>
