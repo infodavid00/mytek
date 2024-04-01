@@ -1318,7 +1318,7 @@ export async function Card4_A5(propId, state) {
       const R = data?.Rows?.map(elem => {
         return {
          Tenant: elem.Tenant,
-         Balance: elem.Balance,
+         Balance: parseFloat(elem.Balance.replace(/,/g, '')),
          Note: elem.Note
         }
       })
