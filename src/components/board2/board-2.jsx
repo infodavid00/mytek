@@ -34,7 +34,7 @@ function Board2Component() {
        </div>
      </div>
      {/* header */}
-
+    
 
      {/* level1 */}
      <div className='board2-levels-container'>
