@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import '../board-1.css';
 import './sec1.css';
 import { lvl1Data } from './dropdown.jsx';
-import { currentMonthName, getOneTwoAndThreeMonthBack, showDateYear, startOfMonth } from '../../../utils/dates/date.jsx';
+import { currentMonthName, getOneTwoAndThreeMonthBack, getThisOneandTwoMonthBack, showDateYear, startOfMonth } from '../../../utils/dates/date.jsx';
 import logo from '../../../assets/svgs/local_1 (1).svg';
 import { Card3_A1A2, Card3_A3A4, Card3_A5A6 } from '../../../utils/boards/board1.jsx';
 import queryFormater from './queryFormater.jsx'
@@ -93,28 +93,6 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
   );
   const [BoardshouldStartQuery, BoardsetshouldStartQuery] = useState(true);
 
-  const level2barsecDDMMYY = () => {
-    const returnObject = [{}, {}, {}];
-    const months = getOneTwoAndThreeMonthBack();
-
-    returnObject[0]['raw'] = startOfMonth(months[0]);
-    returnObject[0]['ser'] = [];
-    returnObject[1]['raw'] = startOfMonth(months[1]);
-    returnObject[1]['ser'] = [];
-    returnObject[2]['raw'] = startOfMonth(months[2]);
-    returnObject[2]['ser'] = [];
-    returnObject[0]['ser'].push(showDateYear(new Date(returnObject[0]['raw'])));
-    returnObject[1]['ser'].push(showDateYear(new Date(returnObject[1]['raw'])));
-    returnObject[2]['ser'].push(showDateYear(new Date(returnObject[2]['raw'])));
-    returnObject[0]['ser'].push(currentMonthName(new Date(returnObject[0]['raw'])));
-    returnObject[0]['ser'] = returnObject[0]['ser'].join(' ');
-    returnObject[1]['ser'].push(currentMonthName(new Date(returnObject[1]['raw'])));
-    returnObject[1]['ser'] = returnObject[1]['ser'].join(' ');
-    returnObject[2]['ser'].push(currentMonthName(new Date(returnObject[2]['raw'])));
-    returnObject[2]['ser'] = returnObject[2]['ser'].join(' ');
-    return returnObject;
-  };
-
   const [level2_A1A2, setlevel2_A1A2] = useState({ percentage: '...', A: '...', B: '...' });
   const [level2_A3A4, setlevel2_A1A4] = useState({ percentage: '...', A: '...', B: '...' });
   const [level2_A5A6, setlevel2_A5A6] = useState({ percentage: '...', A: '...', B: '...' });
@@ -129,13 +107,10 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
     setshouldStartQuery(BoardshouldStartQuery)
 
     if (BoardshouldStartQuery) {
-    console.log('from section 1 = ' , queryFormater(PropertNameSelectedValue))
-      // 
-      // 
-      // 
-      Card3_A1A2(queryFormater(PropertNameSelectedValue), setlevel2_A1A2, new Date(level2barsecDDMMYY()[2]['raw']));
-      Card3_A3A4(queryFormater(PropertNameSelectedValue), setlevel2_A1A4, new Date(level2barsecDDMMYY()[1]['raw']));
-      Card3_A5A6(queryFormater(PropertNameSelectedValue), setlevel2_A5A6, new Date(level2barsecDDMMYY()[0]['raw']));
+    console.log('from section 1 = ')
+      Card3_A1A2(PropertNameSelectedValue, setlevel2_A1A2, getThisOneandTwoMonthBack()[0]);
+      Card3_A3A4(PropertNameSelectedValue, setlevel2_A1A4,getThisOneandTwoMonthBack()[1]);
+      Card3_A5A6(PropertNameSelectedValue, setlevel2_A5A6, getThisOneandTwoMonthBack()[2]);
      }
   }, [BoardshouldStartQuery, BoardsetshouldStartQuery]);
 
@@ -164,17 +139,17 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
           <div>
             <div>{level2_A1A2.percentage + '%'}</div>
             <Level2Bars data={[level2_A1A2.A, level2_A1A2.B]} />
-            <div>{level2barsecDDMMYY()[2]['ser']}</div>
+            <div>{getThisOneandTwoMonthBack()[0]}</div>
           </div>
           <div>
             <div>{level2_A3A4.percentage + '%'}</div>
             <Level2Bars data={[level2_A3A4.A, level2_A3A4.B]} />
-            <div>{level2barsecDDMMYY()[1]['ser']}</div>
+            <div>{getThisOneandTwoMonthBack()[1]}</div>
           </div>
           <div>
             <div>{level2_A5A6.percentage + '%'}</div>
             <Level2Bars data={[level2_A5A6.A, level2_A5A6.B]} />
-            <div>{level2barsecDDMMYY()[0]['ser']}</div>
+            <div>{getThisOneandTwoMonthBack()[2]}</div>
           </div>
         </div>
       </div>

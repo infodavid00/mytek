@@ -84,7 +84,7 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
 
   useEffect(() => {
    if (shouldStartQuery) {
-    console.log('from section 2 = ' , queryFormater(currentPropertyId))
+    console.log('from section 2 = ')
     setLastupdated(getCurrentFormattedDateAndTime())
     Card1_A2(queryFormater(currentPropertyId), setlevel3_A2)
     Card1_B2(queryFormater(currentPropertyId), setlevel3_B2)

@@ -38,7 +38,7 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
 
   useEffect(() => {
    if (shouldStartQuery) {
-    console.log('from section 3 = ' , queryFormater(currentPropertyId))
+    console.log('from section 3 = ')
     //
     //  
     // 
