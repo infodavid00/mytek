@@ -5,7 +5,7 @@ import numeral from 'numeral';
 import { getThisOneandTwoMonthBack } from '../../../utils/dates/date.jsx';
 
 
-const formatNumber = num => numeral(num).format("0,0")
+const formatNumber = num => numeral(Math.floor(num)).format("0,0");
 
 function TableD({ closeNav, PropertyId }) {
   const [responseState, setResponseState] = useState(null);
