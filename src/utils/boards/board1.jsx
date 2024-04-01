@@ -661,7 +661,7 @@ export async function Card2_A5(propId, state) {
   state(null)
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -671,7 +671,26 @@ export async function Card2_A5(propId, state) {
     if (response.status === 200) {
       const data = await response.json();
       if (data) {
-        state(data);
+      const dataRows = data.Rows;
+      let FilteredRows;
+
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+          let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+          PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+          })
+         FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      const R = FilteredRows.map(elem => {
+        return {
+         PropertyName: elem[" Property Name"],
+         Amount: elem[[`Amount Charged ${getThisOneandTwoMonthBack()[0]}`]]
+        }
+      })
+      state(R);
       } else {
         state('0');
       }
@@ -706,7 +725,7 @@ export async function Card2_A6(propId, state) {
   state(null)
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -716,7 +735,26 @@ export async function Card2_A6(propId, state) {
     if (response.status === 200) {
       const data = await response.json();
       if (data) {
-        state(data);
+      const dataRows = data.Rows;
+      let FilteredRows;
+
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+          let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+          PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+          })
+         FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      const R = FilteredRows.map(elem => {
+        return {
+         PropertyName: elem[" Property Name"],
+         Amount: elem[[`Amount Collected ${getThisOneandTwoMonthBack()[0]}`]]
+        }
+      })
+      state(R);
       } else {
         state('0');
       }
