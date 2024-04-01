@@ -6,7 +6,8 @@ import numeral from 'numeral';
 
 const token = Cookies.get();
 const AuthorizationToken = token['x-x-TOKEN-user'];
-const formatNumber = num => numeral(num).format("0,0")
+const formatNumber = num => numeral(Math.floor(num)).format("0,0");
+
 
 export async function Card1_A2(propId, state) {
   state('...')
