@@ -7,6 +7,6 @@
 #  "password": "Bushburg-AP1"
 # }
 
-# GET https://cors-proxy-lgy8.onrender.com/?url=https://bbp.api.rentmanager.com
+# GET https://cors-proxy-lgy8.onrender.com/?url=https://bbp.api.rentmanager.com/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream
 # Content-Type: application/json
-# X-RM12Api-ApiToken: AIfM9kbq7pf2vzoK0S9xxZsZ0TDfVHbN9GGlwfXH2MtrlbXrfw1ruwls7tGDRsVCLryBeACF3o8xAlkJyHFmbgad7sOE_wPwAOKgoSKQGZI=
+# X-RM12Api-ApiToken: M0fEiBA29PJtwRJ2hzX1a6R0D4yLuVytS5whXPxMOtgh8fzO8Fmp2hAkE4dOmKwkmrhiwPi734ni-UR9YRuQQBkdDyzakV95IdogJIk4NO4=

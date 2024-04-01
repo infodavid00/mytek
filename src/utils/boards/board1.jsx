@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { BASENDPOINT, PROXYSERVER } from '../../variable.jsx';
 import { lvl1Data } from '../../components/board1/secs/dropdown.jsx';
-import { endOfMonth, startOfMonth, startOfWeek } from '../dates/date.jsx';
+import { endOfMonth, startOfMonth, startOfWeek ,getThisOneandTwoMonthBack} from '../dates/date.jsx';
 import numeral from 'numeral';
 
 const token = Cookies.get();
@@ -534,10 +534,10 @@ export async function Card1_D1(propId, state) {
  
 
 export async function Card2_A1(propId, state) {
-  state('...')
+  state('...') 
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -546,11 +546,25 @@ export async function Card2_A1(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      const AMOUNT = data?.reduce((accumulator, elem) => typeof elem.Amount === 'number' ?
-         accumulator + elem.Amount : accumulator + 0 , 0 );
+      const dataRows = data.Rows;
+      let FilteredRows;
 
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+          let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+          PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+          })
+         FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
+        const am = Number(elem[`Amount Charged ${getThisOneandTwoMonthBack()[0]}`])
+        return am + accumulator
+      } ,0)
+      console.log(AMOUNT)
       let Amount = String(AMOUNT)
-
       if (Amount.includes('.')) {
         const splittedAM = Amount.split('.');
         splittedAM[1] = splittedAM[1].slice(0,2)
@@ -584,7 +598,7 @@ export async function Card2_A2(propId, state) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT +  `/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -593,12 +607,25 @@ export async function Card2_A2(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      const AMOUNT = data?.reduce( 
-        (accumulator, elem) => typeof elem.Amount === 'number' ?
-            accumulator + elem.Amount : accumulator + 0 , 0 );
+      const dataRows = data.Rows;
+      let FilteredRows;
 
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+          let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+          PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+          })
+         FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
+        const am = Number(elem[`Amount Collected ${getThisOneandTwoMonthBack()[0]}`])
+        return am + accumulator
+      } ,0)
+      console.log(AMOUNT)
       let Amount = String(AMOUNT)
-
       if (Amount.includes('.')) {
         const splittedAM = Amount.split('.');
         splittedAM[1] = splittedAM[1].slice(0,2)

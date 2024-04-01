@@ -135,7 +135,7 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
       {/* level 1 */}
 
 
-      {/* <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
+      <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
         <div className='board1-sec3-level2-children'>
           <div className='board1-sec3-level2-children-title'>Total Arrears:</div>
           <div className='board1-sec3-level2-children-val' style={{color:'grey'}}>$5,046,519.91</div>
@@ -148,7 +148,7 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
           <div className='board1-sec3-level2-children-title'>Arrears Collected MTD:</div>
           <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>$553,783.23</div>
         </div>
-      </div> */}
+      </div>
       {/* level 2 */}
 
 
@@ -156,11 +156,11 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
         <div id='board1-sec3-level3-title'>Legal in Action</div>
         <div id='board1-sec3-level3-sec2-body'>
           <div id='board1-sec3-level3-sec2-1'>
-            <div id='board1-sec3-level3-bar-title'>{level3_A1A2_PIE}%</div>
+            {/* <div id='board1-sec3-level3-bar-title'>{level3_A1A2_PIE}%</div> */}
             <Level3Bar percentageOfNotLegal={level3_A1A2_PIE} />
-            <div style={{fontFamily: 'regular'}} >
+            <div style={{fontFamily: 'regular',marginTop:'1em'}} >
              Legal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorB)'}}></span>
-             NotLegal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorD)'}}></span>
+             {/* NotLegal: <span className='board1-sec3-level3-bar-progress-label' style={{backgroundColor:'var(--colorD)'}}></span> */}
             </div>
           </div>
           <div id='board1-sec3-level3-sec2-2'>

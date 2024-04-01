@@ -98,8 +98,8 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
     Card1_D3(queryFormater(currentPropertyId), setlevel3_D3)
     Card1_D1(queryFormater(currentPropertyId), setlevel3_D1)
 
-    Card2_A1(queryFormater(currentPropertyId), setlevel1_A1)
-    Card2_A2(queryFormater(currentPropertyId), setlevel1_A2) 
+    Card2_A1(currentPropertyId, setlevel1_A1)
+    Card2_A2(currentPropertyId, setlevel1_A2) 
     
     Card2_A3(queryFormater(currentPropertyId), setlevel2_A3)
     Card2_A4(queryFormater(currentPropertyId), setlevel2_A4)
