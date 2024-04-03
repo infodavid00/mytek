@@ -785,7 +785,7 @@ export async function Card2_A6(propId, state) {
 
 
 
-export async function fetchAndProcessDataForPercentageF(propId, state, endpoint) {
+export async function fetchAndProcessDataForPercentageF(propId, state, endpoint, title) {
   state('...')
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
@@ -796,19 +796,27 @@ export async function fetchAndProcessDataForPercentageF(propId, state, endpoint)
         'X-RM12Api-ApiToken': AuthorizationToken
       },
     });
-    if (response.status === 200) {
+     if (response.status === 200) {
       const data = await response.json();
-      const amount = data?.reduce( 
-        (accumulator, elem) => typeof elem.Amount === 'number' ?
-            accumulator + elem.Amount : accumulator + 0 , 0 );
-      let formattedAmount = String(amount)
-      if (formattedAmount.includes('.')) {
-        const splittedAmount = formattedAmount.split('.');
-        splittedAmount[1] = splittedAmount[1].slice(0,2)
-        formattedAmount = splittedAmount.join('.')
-      }
+      const dataRows = data.Rows;
+      let FilteredRows;
 
-      return Number(formattedAmount)
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+          let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+          PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+          })
+         FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
+        const am = Number(elem[`Amount ${title} ${getThisOneandTwoMonthBack()[0]}`])
+        return am + accumulator
+      } ,0)
+      // console.log(AMOUNT)
+      return AMOUNT ?? 0;
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -865,13 +873,16 @@ export async function Card2_A4(propId, state) {
 
 
 export async function Card2_A7(propId, state) {
-  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId}&fields=Allocations,Amount,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID,AmountAllocated`);
-  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, `/Charges?filters=TransactionDate,bt,(${startOfMonth()}%2C${endOfMonth()});PropertyID,${propId};AmountAllocated,gt,0&fields=Allocations,Amount,AmountAllocated,Comment,CreateDate,IsFullyAllocated,PropertyID,Tenant,UnitID`);
+  const url = `/ReportWriterReports/190/RunReportWriterReport?GetOptions=ReturnJSONStream`
+  const AmountA = await fetchAndProcessDataForPercentageF(propId, state, url, 'Charged');
+  const AmountB = await fetchAndProcessDataForPercentageF(propId, state, url, 'Collected');
+  console.log('AHHAHAAH', AmountA, AmountB)
   if (AmountA && AmountB) {
-  let percentage = AmountB < AmountA ? (AmountB / AmountA) * 100 : 100;
-  const Percentage = percentage.toFixed(2)
-
-  state(Percentage ? String(Percentage) : '0.00');
+    const helper  = AmountA !== 0 && AmountA > AmountB ? (AmountB / AmountA) * 100 : 100;
+    let percentage = String(helper) === 'NaN'  ? 0 : helper;
+    const Percentage = percentage.toFixed(2)
+ 
+    state(Percentage ? String(Percentage) : '0.00')
   } else {
      state('0.00');
   }

@@ -9,7 +9,7 @@ function DashboardHeader({active}) {
   const [isLogoutloading, setisLogoutloading] = useState(false);
 
   const lists = [
-    {title:'Collections Dashboard' , index:1},
+    {title:'Collections' , index:1},
     {title:'Leasing' , index:2},
     {title:'Operations' , index:3},
   ]

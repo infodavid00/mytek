@@ -103,14 +103,14 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
     
     Card2_A3(queryFormater(currentPropertyId), setlevel2_A3)
     Card2_A4(queryFormater(currentPropertyId), setlevel2_A4)
-    Card2_A7(queryFormater(currentPropertyId), setlevel2_A7)
+    Card2_A7(currentPropertyId, setlevel2_A7)
    }
   }, [shouldStartQuery]); 
    
   return (
     <div id='board1-sec2'>
       <div id='board1-sec2-header'>
-        <div id='board1-sec2-header-t1'>Collections Dashboard </div>
+        <div id='board1-sec2-header-t1'>Collections </div>
         <div id='board1-sec2-header-t2'>Last updated - {Lastupdated}</div>
       </div>
       {/* header */}
@@ -122,8 +122,8 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
       {/* level1 */}
 
       <div className='perc_1' style={{marginTop : '1em'}}>
-        <div className='board1-sec2-level2-children'>Current Month Residential Collected <Level2Progress percentage={level2_A3} /> </div>
-        <div className='board1-sec2-level2-children'>Current Month Commercial Collected <Level2Progress percentage={level2_A4} /> </div>
+        {/* <div className='board1-sec2-level2-children'>Current Month Residential Collected <Level2Progress percentage={level2_A3} /> </div>
+        <div className='board1-sec2-level2-children'>Current Month Commercial Collected <Level2Progress percentage={level2_A4} /> </div> */}
         <div className='board1-sec2-level2-children'>Current Month Collected <Level2Progress percentage={level2_A7} /> </div>
       </div>
       {/* level2 */}
