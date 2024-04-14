@@ -1460,7 +1460,7 @@ export async function Card3_D1(propId, state) {
   state('...') 
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/17/RunReport?parameters=StartDate,2024-04-01;HISTCATEGORYIDS,5&GetOptions=ReturnJSONStream`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/17/RunReport?parameters=StartDate,${startOfWeek()};HISTCATEGORYIDS,5&GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
