@@ -4,7 +4,7 @@ import '../board-1.css'
 import './sec3.css'
 // import { currentMonthName } from '../../../utils/dates/date.jsx'
 import { PieChart } from 'react-minimal-pie-chart';
-import { Card4_A1A2_PIE, Card4_A3, Card4_A4 } from '../../../utils/boards/board1.jsx';
+import { Card4_A1A2_PIE, Card4_A3, Card4_A4, Card4_NEW } from '../../../utils/boards/board1.jsx';
 import TableB from '../utils/tableB.jsx'
 import queryFormater from './queryFormater.jsx'
 
@@ -36,6 +36,13 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
   const [level3_A3, setlevel3_A3] = useState('...')
   const [level3_A4, setlevel3_A4] = useState('...')
 
+  const [level3_newA, setlevel3_newA] = useState('...')
+  const [level3_newB, setlevel3_newB] = useState('...')
+  const [level3_newC, setlevel3_newC] = useState('...')
+  const [level3_newD, setlevel3_newD] = useState('...')
+  const [level3_newE, setlevel3_newE] = useState('...')
+
+
   useEffect(() => {
    if (shouldStartQuery) {
     console.log('from section 3 = ')
@@ -45,6 +52,11 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
     Card4_A1A2_PIE(queryFormater(currentPropertyId), setlevel3_A1A2_PIE)
     Card4_A3(currentPropertyId, setlevel3_A3)
     Card4_A4(currentPropertyId, setlevel3_A4)
+    Card4_NEW(currentPropertyId, setlevel3_newA, 'LessThan30')
+    Card4_NEW(currentPropertyId, setlevel3_newB, 'LessThan60')
+    Card4_NEW(currentPropertyId, setlevel3_newC, 'LessThan90')
+    Card4_NEW(currentPropertyId, setlevel3_newD, 'GreaterThan90')
+    Card4_NEW(currentPropertyId, setlevel3_newE, 'TotalLeft')
    }
   }, [shouldStartQuery]); 
 
@@ -137,16 +149,24 @@ function Sec3({currentPropertyId, shouldStartQuery}) {
 
       <div id='board1-sec3-level2-body' className='board1-sec3-level1-body'>
         <div className='board1-sec3-level2-children'>
-          <div className='board1-sec3-level2-children-title'>Total Arrears:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'grey'}}>$0.00</div>
+          <div className='board1-sec3-level2-children-title'>0-30 :</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'white'}}>${level3_newA}</div>
         </div>
         <div className='board1-sec3-level2-children'>
-          <div className='board1-sec3-level2-children-title'>Total Prepaid:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>($0.00)</div>
+          <div className='board1-sec3-level2-children-title'>31-60 :</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'white'}}>${level3_newB}</div>
         </div>
         <div className='board1-sec3-level2-children'>
-          <div className='board1-sec3-level2-children-title'>Arrears Collected MTD:</div>
-          <div className='board1-sec3-level2-children-val' style={{color:'orange'}}>$0.00</div>
+          <div className='board1-sec3-level2-children-title'>61-90 :</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'white'}}>${level3_newC}</div>
+        </div>
+        <div className='board1-sec3-level2-children'>
+          <div className='board1-sec3-level2-children-title'>91+ :</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'white'}}>${level3_newD}</div>
+        </div>
+        <div className='board1-sec3-level2-children'>
+          <div className='board1-sec3-level2-children-title'>Total :</div>
+          <div className='board1-sec3-level2-children-val' style={{color:'white'}}>${level3_newE}</div>
         </div>
       </div>
       {/* level 2 */}

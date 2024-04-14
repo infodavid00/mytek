@@ -1,7 +1,7 @@
 
 import React,{useState} from 'react'
 import './dashboardHeader.css'
-import logo from '../../assets/svgs/local_1 (2) copy.svg'
+import logo from '../../assets/svgs/BushburgSymbol_RGB_Charcoal.png'
 import handleLogout from '../../utils/auth/handleLogout.jsx'
 import { Link } from 'react-router-dom'
 

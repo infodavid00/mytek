@@ -1062,8 +1062,23 @@ export async function Card4_A3(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      const DATALENGTH = data?.Rows.length;
+      const dataRows = data.Rows;
+      let FilteredRows;
+
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+        PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+        })
+        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+
+      const DATALENGTH = FilteredRows.length;
       state(formatNumber(DATALENGTH));
+      // the output
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
@@ -1220,11 +1235,25 @@ export async function Card4_A4(propId, state) {
     });
     if (response.status === 200) {
       const data = await response.json();
-      const AMOUNT = data.Rows?.reduce((accumulator,elem) => {
+      const dataRows = data.Rows;
+      let FilteredRows;
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+        PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+        })
+        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+      // console.log(FilteredRows)
+
+      const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
         const am = parseFloat(elem.Balance.replace(/,/g, ''))
         return am + accumulator
       } ,0)
-      console.log('Legal in action', AMOUNT)
+      console.log('Tota Balance', AMOUNT)
       let Amount = String(AMOUNT)
       if (Amount.includes('.')) {
         const splittedAM = Amount.split('.');
@@ -1326,7 +1355,21 @@ export async function Card4_A5(propId, state) {
     });
     if (response.status === 200) {
      const data = await response.json();
-      const R = data?.Rows?.map(elem => {
+      const dataRows = data.Rows;
+      let FilteredRows;
+
+      if (propId.length === lvl1Data[0].lists.length - 1 ||
+        propId.includes("50")) {
+        FilteredRows = dataRows;
+      } else {
+        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+        PropertyNames = PropertyNames.map(elem => {
+            return elem.Name
+        })
+        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      }
+
+      const R = FilteredRows?.map(elem => {
         return {
          Tenant: elem.Tenant,
          Balance: parseFloat(elem.Balance.replace(/,/g, '')),
@@ -1339,5 +1382,113 @@ export async function Card4_A5(propId, state) {
       }
   } catch (error) {
     state(false);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function Card4_NEW(propId, state, selector) {
+  state('...')
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/78/RunReport?GetOptions=ReturnJSONStream`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      const dataRows = data.Grid1;
+      let FilteredRows;
+      FilteredRows = dataRows
+      // if (propId.length === lvl1Data[0].lists.length - 1 ||
+      //   propId.includes("50")) {
+      //   FilteredRows = dataRows;
+      // } else {
+      //   let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+      //   PropertyNames = PropertyNames.map(elem => {
+      //       return elem.Name
+      //   })
+      //   FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      // }
+      // console.log(FilteredRows)
+      const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
+        const am = elem[selector]
+        return am + accumulator
+      } ,0)
+      console.log(`${selector} Tota Balance`, AMOUNT)
+      let Amount = String(AMOUNT)
+      if (Amount.includes('.')) {
+        const splittedAM = Amount.split('.');
+        splittedAM[1] = splittedAM[1].slice(0,2)
+        Amount = splittedAM.join('.')
+      }
+      state(data ? formatNumber(Amount) : '0');
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
+  }
+}
+ 
+
+
+
+
+
+
+
+
+export async function Card3_D1(propId, state) {
+  state('...') 
+  try {
+    if (!AuthorizationToken) throw new Error('Authorization token not found');
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/17/RunReport?parameters=StartDate,${startOfWeek()};HISTCATEGORYIDS,5&GetOptions=ReturnJSONStream`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RM12Api-ApiToken': AuthorizationToken
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      const length = []
+      if (data.Grid1.length > 0) length.push(1)
+      if (data.Grid2.length > 0) length.push(1)
+      if (data.Grid3.length > 0) length.push(1)
+      if (data.Grid4.length > 0) length.push(1)
+      if (data.Grid5.length > 0) length.push(1)
+      if (data.Grid6.length > 0) length.push(1)
+      if (data.Grid7.length > 0) length.push(1)
+      if (data.Grid8.length > 0) length.push(1)
+      if (data.Grid9.length > 0) length.push(1)
+      if (data.Grid10.length > 0) length.push(1)
+      if (data.Grid11.length > 0) length.push(1)
+      const Number = length.length
+      state(data ? Number : '0');
+    } else if (response.status !== 204) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+      state('0');
+    }
+  } catch (error) {
+    state('!!!');
   }
 }

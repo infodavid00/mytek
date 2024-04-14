@@ -3,7 +3,7 @@ import '../board-1.css';
 import './sec1.css';
 import { lvl1Data } from './dropdown.jsx';
 import { currentMonthName, getOneTwoAndThreeMonthBack, getThisOneandTwoMonthBack, showDateYear, startOfMonth } from '../../../utils/dates/date.jsx';
-import logo from '../../../assets/svgs/local_1 (1).svg';
+import logo from '../../../assets/svgs/BushburgSymbol_RGB_White.png';
 import { Card3_A1A2, Card3_A3A4, Card3_A5A6 } from '../../../utils/boards/board1.jsx';
 import queryFormater from './queryFormater.jsx'
  
@@ -137,9 +137,9 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
         <div id='board1-sec1-level2-title'>Previous Three Months Progress Collected</div>
         <div id='board1-sec1-level2-barssec-body'>
           <div>
-            <div>{level2_A1A2.percentage + '%'}</div>
-            <Level2Bars data={[level2_A1A2.A, level2_A1A2.B]} />
-            <div>{getThisOneandTwoMonthBack()[0]}</div>
+            <div>{level2_A5A6.percentage + '%'}</div>
+            <Level2Bars data={[level2_A5A6.A, level2_A5A6.B]} />
+            <div>{getThisOneandTwoMonthBack()[2]}</div>
           </div>
           <div>
             <div>{level2_A3A4.percentage + '%'}</div>
@@ -147,9 +147,9 @@ function Sec1({ setcurrentPropertyId,  setshouldStartQuery }) {
             <div>{getThisOneandTwoMonthBack()[1]}</div>
           </div>
           <div>
-            <div>{level2_A5A6.percentage + '%'}</div>
-            <Level2Bars data={[level2_A5A6.A, level2_A5A6.B]} />
-            <div>{getThisOneandTwoMonthBack()[2]}</div>
+            <div>{level2_A1A2.percentage + '%'}</div>
+            <Level2Bars data={[level2_A1A2.A, level2_A1A2.B]} />
+            <div>{getThisOneandTwoMonthBack()[0]}</div>
           </div>
         </div>
       </div>

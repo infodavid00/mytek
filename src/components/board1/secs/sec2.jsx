@@ -3,7 +3,7 @@ import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
-import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4, Card2_A7 } from '../../../utils/boards/board1'
+import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4, Card2_A7, Card3_D1 } from '../../../utils/boards/board1'
 import { currentMonthName, getCurrentFormattedDateAndTime } from '../../../utils/dates/date.jsx'
 import queryFormater from './queryFormater.jsx'
 import TableC from '../utils/tableC.jsx'
@@ -104,6 +104,8 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
     Card2_A3(queryFormater(currentPropertyId), setlevel2_A3)
     Card2_A4(queryFormater(currentPropertyId), setlevel2_A4)
     Card2_A7(currentPropertyId, setlevel2_A7)
+
+    Card3_D1(currentPropertyId, setlevel3_D1)
    }
   }, [shouldStartQuery]); 
    
@@ -133,7 +135,7 @@ function Sec2({currentPropertyId, shouldStartQuery}) {
         <div id='board1-sec2-level1-body'>
            <div className='board1-sec2-level3-header-child-cont'> 
               <div>Contacted This Week : <span style={{color:'orange'}}>{level3_D1}</span></div>
-              <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div>
+              {/* <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div> */}
            </div>
            <div className='board1-sec2-level3-header-child-cont'>
               <div id='board1-sec2-level3-header-child2-top'>Total Tenant Balances</div>        
