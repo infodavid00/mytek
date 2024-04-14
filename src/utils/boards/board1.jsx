@@ -1460,7 +1460,7 @@ export async function Card3_D1(propId, state) {
   state('...') 
   try {
     if (!AuthorizationToken) throw new Error('Authorization token not found');
-    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/17/RunReport?parameters=StartDate,${startOfWeek()};HISTCATEGORYIDS,5&GetOptions=ReturnJSONStream`, {
+    const response = await fetch(PROXYSERVER + BASENDPOINT + `/Reports/17/RunReport?parameters=StartDate,2024-04-01;HISTCATEGORYIDS,5&GetOptions=ReturnJSONStream`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -1470,23 +1470,23 @@ export async function Card3_D1(propId, state) {
     if (response.status === 200) {
       const data = await response.json();
       const length = []
-      if (data.Grid1.length > 0) length.push(1)
-      if (data.Grid2.length > 0) length.push(1)
-      if (data.Grid3.length > 0) length.push(1)
-      if (data.Grid4.length > 0) length.push(1)
-      if (data.Grid5.length > 0) length.push(1)
-      if (data.Grid6.length > 0) length.push(1)
-      if (data.Grid7.length > 0) length.push(1)
-      if (data.Grid8.length > 0) length.push(1)
-      if (data.Grid9.length > 0) length.push(1)
-      if (data.Grid10.length > 0) length.push(1)
-      if (data.Grid11.length > 0) length.push(1)
+      if (data?.Grid1?.length > 0) length.push(1)
+      if (data?.Grid2?.length > 0) length.push(1)
+      if (data?.Grid3?.length > 0) length.push(1)
+      if (data?.Grid4?.length > 0) length.push(1)
+      if (data?.Grid5?.length > 0) length.push(1)
+      if (data?.Grid6?.length > 0) length.push(1)
+      if (data?.Grid7?.length > 0) length.push(1)
+      if (data?.Grid8?.length > 0) length.push(1)
+      if (data?.Grid9?.length > 0) length.push(1)
+      if (data?.Grid10?.length > 0) length.push(1)
+      if (data?.Grid11?.length > 0) length.push(1)
       const Number = length.length
-      state(data ? Number : '0');
+      state(Number);
     } else if (response.status !== 204) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
-      state('0');
+      state('...');
     }
   } catch (error) {
     state('!!!');
