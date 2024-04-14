@@ -1065,16 +1065,16 @@ export async function Card4_A3(propId, state) {
       const dataRows = data.Rows;
       let FilteredRows;
 
-      if (propId.length === lvl1Data[0].lists.length - 1 ||
-        propId.includes("50")) {
+      // if (propId.length === lvl1Data[0].lists.length - 1 ||
+      //   propId.includes("50")) {
         FilteredRows = dataRows;
-      } else {
-        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
-        PropertyNames = PropertyNames.map(elem => {
-            return elem.Name
-        })
-        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
-      }
+      // } else {
+      //   let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+      //   PropertyNames = PropertyNames.map(elem => {
+      //       return elem.Name
+      //   })
+      //   FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      // }
 
       const DATALENGTH = FilteredRows.length;
       state(formatNumber(DATALENGTH));
@@ -1237,16 +1237,16 @@ export async function Card4_A4(propId, state) {
       const data = await response.json();
       const dataRows = data.Rows;
       let FilteredRows;
-      if (propId.length === lvl1Data[0].lists.length - 1 ||
-        propId.includes("50")) {
+      // if (propId.length === lvl1Data[0].lists.length - 1 ||
+      //   propId.includes("50")) {
         FilteredRows = dataRows;
-      } else {
-        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
-        PropertyNames = PropertyNames.map(elem => {
-            return elem.Name
-        })
-        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
-      }
+      // } else {
+      //   let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+      //   PropertyNames = PropertyNames.map(elem => {
+      //       return elem.Name
+      //   })
+      //   FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      // }
       // console.log(FilteredRows)
 
       const AMOUNT = FilteredRows?.reduce((accumulator,elem) => {
@@ -1358,16 +1358,16 @@ export async function Card4_A5(propId, state) {
       const dataRows = data.Rows;
       let FilteredRows;
 
-      if (propId.length === lvl1Data[0].lists.length - 1 ||
-        propId.includes("50")) {
+      // if (propId.length === lvl1Data[0].lists.length - 1 ||
+      //   propId.includes("50")) {
         FilteredRows = dataRows;
-      } else {
-        let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
-        PropertyNames = PropertyNames.map(elem => {
-            return elem.Name
-        })
-        FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
-      }
+      // } else {
+      //   let PropertyNames = lvl1Data[0].lists.filter(elem => propId.includes(elem.PropertyID));
+      //   PropertyNames = PropertyNames.map(elem => {
+      //       return elem.Name
+      //   })
+      //   FilteredRows = dataRows.filter((elem)=> PropertyNames.includes(elem[" Property Name"]))
+      // }
 
       const R = FilteredRows?.map(elem => {
         return {
