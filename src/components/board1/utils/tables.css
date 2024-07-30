@@ -49,6 +49,16 @@
   transform: translate(-50%, -50%);
   border-radius: 12px;
 }
+#table-boards-11-tablecontainer-before-long {
+  width: 60%;
+  height: 90vh;
+  position: fixed;
+  overflow: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+}
 #table-boards-11-tablecontainer {
   width: 100%;
   background-color: var(--colorA);
@@ -87,6 +97,12 @@
 
 @media (max-width: 760px) {
 #table-boards-11-tablecontainer-before {
+  width: 93%;
+  height: 90vh;
+}
+}
+@media (min-width: 760px) {
+#table-boards-11-tablecontainer-before-long {
   width: 93%;
   height: 90vh;
 }

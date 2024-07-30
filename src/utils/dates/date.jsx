@@ -100,3 +100,19 @@ export function endOfMonth(currentDate = new Date()) {
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 }
+
+export function getThisOneandTwoMonthBack() {
+  const currentDate = new Date();
+  const oneMonthsBack = new Date(currentDate);
+  oneMonthsBack.setMonth(currentDate.getMonth());
+  const twoMonthsBack = new Date(currentDate);
+  twoMonthsBack.setMonth(currentDate.getMonth() - 1);
+  const threeMonthsBack = new Date(currentDate);
+  threeMonthsBack.setMonth(currentDate.getMonth() - 2);
+  const formatDate = (date) => {
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    return `${month} ${year}`;
+  };
+  return [formatDate(oneMonthsBack), formatDate(twoMonthsBack), formatDate(threeMonthsBack)];
+}

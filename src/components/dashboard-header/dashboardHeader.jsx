@@ -1,15 +1,17 @@
 
-import React from 'react'
+import React,{useState} from 'react'
 import './dashboardHeader.css'
-import logo from '../../assets/svgs/local_1 (2) copy.svg'
+import logo from '../../assets/svgs/BushburgSymbol_RGB_Charcoal.png'
+import handleLogout from '../../utils/auth/handleLogout.jsx'
 import { Link } from 'react-router-dom'
 
 function DashboardHeader({active}) {
+  const [isLogoutloading, setisLogoutloading] = useState(false);
+
   const lists = [
-    {title:'Board1' , index:1},
-    {title:'Board2' , index:2},
-    {title:'Board3' , index:3},
-    {title:'Board4' , index:4}
+    {title:'Collections' , index:1},
+    {title:'Leasing' , index:2},
+    {title:'Operations' , index:3},
   ]
 
   return (
@@ -22,6 +24,9 @@ function DashboardHeader({active}) {
             : 'dashboard-header-tabs'} to={`/dashboard/${elem.index}`}>
              {elem.title}</Link>
           ))}
+          <button id='dashboard-header-button' onClick={async ()=> await handleLogout(setisLogoutloading)}>
+          {isLogoutloading ? 'Signing out....' : 'Sign out'}
+          </button>
        </div>
     </div>
   )

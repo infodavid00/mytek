@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './tables.css';
 import { Card1_A1, Card1_B1, Card1_C1 } from '../../../utils/boards/board1';
+import queryFormater from '../secs/queryFormater.jsx';
 
 
 function Tables({ closeNav, PropertyId, Index }) {
   const [responseState, setResponseState] = useState(null);
-
   useEffect(() => {
-     if (Index === 1)  Card1_A1(PropertyId, setResponseState);
-     if (Index === 2)  Card1_B1(PropertyId, setResponseState);
-     if (Index === 3)  Card1_C1(PropertyId, setResponseState);
+     if (Index === 1)  Card1_A1(queryFormater(PropertyId), setResponseState);
+     if (Index === 2)  Card1_B1(queryFormater(PropertyId), setResponseState);
+     if (Index === 3)  Card1_C1(queryFormater(PropertyId), setResponseState);
   }, []);
 
   let response = []
@@ -46,13 +46,13 @@ function Tables({ closeNav, PropertyId, Index }) {
             </tr>
           </thead>
           <tbody>
-            {responseState !== null ? response.map((item, index) => (
+            {responseState !== null ? response.slice().sort((a, b) => a.FirstName.localeCompare(b.FirstName)).map((item, index) => (
               <tr key={index}>
                 <td className='table-boards-11-tablecontainer-thtd'>{index + 1}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.propertyName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.FirstName}</td>
                 <td className='table-boards-11-tablecontainer-thtd'>{item.LastName}</td>
-                <td className='table-boards-11-tablecontainer-thtd'>{item.OpenBalance}</td>
+                <td className='table-boards-11-tablecontainer-thtd'>${item.OpenBalance}</td>
               </tr>
             )) : nullresponse.map((item, index) => (
               <tr key={index}>

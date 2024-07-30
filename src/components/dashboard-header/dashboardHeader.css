@@ -26,6 +26,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1em;
+  /* flex-wrap: wrap; */
 }   
 .dashboard-header-tabs {
   background-color: transparent;
@@ -47,6 +48,23 @@
 }
 
 
+#dashboard-header-button {
+  padding: 10px;
+  border-radius: 7px;
+  border:none;
+  outline: none;
+  font-family: 'bold';
+  color: rgba(0,0,0,0.7);
+  background-color: var(--colorC);
+  transition: 0.2s;
+  cursor: pointer;
+}
+#dashboard-header-button:hover {
+  color : var(--colorD);
+}
+
+
+
 
 @media (min-width:760px) {
 #dashboard-header {
@@ -59,8 +77,11 @@
   gap: 2.5em;
 }   
 }
+
 @media (max-width:760px) {
 #dashboard-header-tabs {
-  margin-top: 1em;
+  margin-top: 0em;
+  justify-content: center;
+  overflow: auto;
 }   
 }

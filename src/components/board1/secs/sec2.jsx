@@ -3,8 +3,11 @@ import React,{useState, useEffect} from 'react'
 import '../board-1.css'
 import './sec2.css'
 import Tables from '../utils/tables'
-import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4 } from '../../../utils/boards/board1'
+import { Card1_A2, Card1_A3, Card1_A4, Card1_B2, Card1_B3, Card1_B4, Card1_C2, Card1_C3, Card1_C4, Card1_D1, Card1_D3, Card2_A1, Card2_A2, Card2_A3, Card2_A4, Card2_A7, Card3_D1 } from '../../../utils/boards/board1'
 import { currentMonthName, getCurrentFormattedDateAndTime } from '../../../utils/dates/date.jsx'
+import queryFormater from './queryFormater.jsx'
+import TableC from '../utils/tableC.jsx'
+import TableD from '../utils/tableD.jsx'
 
 function Level1Card({arr}) {
   const color = arr[0] === 'Charged' ? 'white' : 'orange' 
@@ -15,6 +18,7 @@ function Level1Card({arr}) {
        <div className='board1-sec2-level1card-title'>Total Amount {arr[0]}</div>
        <div className='board1-sec2-level1card-text'>For Month of {arr[1]}</div>
        <div className='board1-sec2-level1card-value' style={{color}}>${arr[2]}</div>
+       <button className='board1-sec2-level1card-btn' onClick={() => arr[3](true)}>More</button>
      </div>
   )
 }
@@ -41,17 +45,19 @@ function Level3Cards({data,color,openTable,otInstructions}) {
         <div>Total Balance:</div>
         <div className='board1-sec2-level13-body-children-text2'>${data[2]}</div>
       </div>
-      <div>
+      {/* <div>
         <div>Average Balance:</div>
         <div className='board1-sec2-level13-body-children-text2'>${data[3]}</div>
-      </div>
-      <button className='board1-sec2-level13-body-children-btn' onClick={()=> { openTable(), otInstructions()}}>Show Me</button>
+      </div> */}
+      <button className='board1-sec2-level13-body-children-btn' onClick={()=> { openTable(), otInstructions()}}>More</button>
     </div>
   )
 }
 
-function Sec2({currentPropertyId}) {
+function Sec2({currentPropertyId, shouldStartQuery}) {
   const [showTable, setShowTable] = useState(false)
+  const [showTableC, setShowTableC] = useState(false)
+  const [showTableD, setShowTableD] = useState(false)
 
   const [tableData, setTableData] = useState(null)
   const [Lastupdated, setLastupdated] = useState('...')
@@ -73,57 +79,63 @@ function Sec2({currentPropertyId}) {
   const [level1_A2, setlevel1_A2] = useState('...')
   const [level2_A3, setlevel2_A3] = useState('...')
   const [level2_A4, setlevel2_A4] = useState('...')
+  const [level2_A7, setlevel2_A7] = useState('...')
 
 
   useEffect(() => {
-   if (currentPropertyId) {
+   if (shouldStartQuery) {
+    console.log('from section 2 = ')
     setLastupdated(getCurrentFormattedDateAndTime())
-    Card1_A2(currentPropertyId, setlevel3_A2)
-    Card1_B2(currentPropertyId, setlevel3_B2)
-    Card1_C2(currentPropertyId, setlevel3_C2)
-    Card1_A3(currentPropertyId, setlevel3_A3)
-    Card1_B3(currentPropertyId, setlevel3_B3)
-    Card1_C3(currentPropertyId, setlevel3_C3)
-    Card1_A4(currentPropertyId, setlevel3_A4)
-    Card1_B4(currentPropertyId, setlevel3_B4)
-    Card1_C4(currentPropertyId, setlevel3_C4)
-    Card1_D3(currentPropertyId, setlevel3_D3)
-    Card1_D1(currentPropertyId, setlevel3_D1)
+    Card1_A2(queryFormater(currentPropertyId), setlevel3_A2)
+    Card1_B2(queryFormater(currentPropertyId), setlevel3_B2)
+    Card1_C2(queryFormater(currentPropertyId), setlevel3_C2)
+    Card1_A3(queryFormater(currentPropertyId), setlevel3_A3)
+    Card1_B3(queryFormater(currentPropertyId), setlevel3_B3)
+    Card1_C3(queryFormater(currentPropertyId), setlevel3_C3)
+    Card1_A4(queryFormater(currentPropertyId), setlevel3_A4)
+    Card1_B4(queryFormater(currentPropertyId), setlevel3_B4)
+    Card1_C4(queryFormater(currentPropertyId), setlevel3_C4)
+    Card1_D3(queryFormater(currentPropertyId), setlevel3_D3)
+    Card1_D1(queryFormater(currentPropertyId), setlevel3_D1)
 
     Card2_A1(currentPropertyId, setlevel1_A1)
     Card2_A2(currentPropertyId, setlevel1_A2) 
     
-    Card2_A3(currentPropertyId, setlevel2_A3)
-    Card2_A4(currentPropertyId, setlevel2_A4)
+    Card2_A3(queryFormater(currentPropertyId), setlevel2_A3)
+    Card2_A4(queryFormater(currentPropertyId), setlevel2_A4)
+    Card2_A7(currentPropertyId, setlevel2_A7)
+
+    Card3_D1(currentPropertyId, setlevel3_D1)
    }
-  }, [currentPropertyId]); 
+  }, [shouldStartQuery]); 
    
   return (
     <div id='board1-sec2'>
       <div id='board1-sec2-header'>
-        <div id='board1-sec2-header-t1'>Collections Dashboard </div>
+        <div id='board1-sec2-header-t1'>Collections </div>
         <div id='board1-sec2-header-t2'>Last updated - {Lastupdated}</div>
       </div>
       {/* header */}
 
       <div id='board1-sec2-level1-body'>
-        <Level1Card arr={['Charged', currentMonthName(), level1_A1]} />
-        <Level1Card arr={['Collected', currentMonthName(), level1_A2]} />
+        <Level1Card arr={['Charged', currentMonthName(), level1_A1, setShowTableC]} />
+        <Level1Card arr={['Collected', currentMonthName(), level1_A2, setShowTableD]} />
       </div>
       {/* level1 */}
 
       <div className='perc_1' style={{marginTop : '1em'}}>
-        <div className='board1-sec2-level2-children'>Current Month Residential Gauge <Level2Progress percentage={level2_A3} /> </div>
-        <div className='board1-sec2-level2-children'>Current Month Commercial Gauge <Level2Progress percentage={level2_A4} /> </div>
+        {/* <div className='board1-sec2-level2-children'>Current Month Residential Collected <Level2Progress percentage={level2_A3} /> </div>
+        <div className='board1-sec2-level2-children'>Current Month Commercial Collected <Level2Progress percentage={level2_A4} /> </div> */}
+        <div className='board1-sec2-level2-children'>Current Month Collected <Level2Progress percentage={level2_A7} /> </div>
       </div>
       {/* level2 */}
 
       <div id='board1-sec2-level13-body'>
+        <div id='board1-sec2-level3-header-child1-top'>Tenant Breakdown</div>
         <div id='board1-sec2-level1-body'>
            <div className='board1-sec2-level3-header-child-cont'> 
-              <div id='board1-sec2-level3-header-child1-top'>Tenant Breakdown</div>
               <div>Contacted This Week : <span style={{color:'orange'}}>{level3_D1}</span></div>
-              <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div>
+              {/* <div>Attention : <span style={{color:'tomato'}}>{level3_D2}</span></div> */}
            </div>
            <div className='board1-sec2-level3-header-child-cont'>
               <div id='board1-sec2-level3-header-child2-top'>Total Tenant Balances</div>        
@@ -140,8 +152,10 @@ function Sec2({currentPropertyId}) {
       {/* level3 */}
       
       {showTable && <Tables closeNav={()=>setShowTable(false)} PropertyId={currentPropertyId} Index={tableData} />}
+      {showTableC && <TableC closeNav={()=>setShowTableC(false)} PropertyId={currentPropertyId} />}
+      {showTableD && <TableD closeNav={()=>setShowTableD(false)} PropertyId={currentPropertyId} />}
     </div>
   )
 }
 
-export default Sec2
+export default Sec2 

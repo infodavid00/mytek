@@ -4,7 +4,6 @@ import Signin from "./containers/auth/signin.jsx"
 import Board1 from "./containers/dashboard/board1.jsx"
 import Board2 from "./containers/dashboard/board2.jsx"
 import Board3 from "./containers/dashboard/board3.jsx"
-import Board4 from "./containers/dashboard/board4.jsx"
 
 function App() {
 
@@ -17,7 +16,6 @@ function App() {
        <Route exact path="/dashboard/1" element={<Board1 />} />
        <Route exact path="/dashboard/2" element={<Board2 />} />
        <Route exact path="/dashboard/3" element={<Board3 />} />
-       <Route exact path="/dashboard/4" element={<Board4 />} />
       </Routes>
     </>
   )
